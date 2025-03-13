@@ -3043,13 +3043,17 @@ MonoBehaviour:
     m_Extent: {x: 288.7, y: 0, z: 186.7}
   - m_Center: {x: -691.6, y: -270.4, z: 391.5}
     m_Extent: {x: 146.1, y: 0, z: 185.5}
-  regenerateResource:
+  regeneratePrefab:
   - {fileID: 164262, guid: d8d9fb21f04d0b34799e4d63ffe82c9f, type: 3}
   - {fileID: 156448, guid: 149f31fa3c070bf44a66da3a784cdc43, type: 3}
   - {fileID: 108168, guid: 675dd002390c04947b66a330d6ce7727, type: 3}
   - {fileID: 160516, guid: 601b7f10102e66b41b534b7b077bd9a0, type: 3}
   - {fileID: 167346, guid: 71a5880545553674a9f302b0d6db4fec, type: 3}
   - {fileID: 120506, guid: 758be797b2a1f0e48a305f88f9784d43, type: 3}
+  resourceMaxAmountA: 15
+  resourceMaxAmountB: 30
+  resourceMaxAmountC: 30
+  resourceMaxAmountD: 32
   resourceAmountA: 0
   resourceAmountB: 0
   resourceAmountC: 0

@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Regenerate : MonoBehaviour
 {
@@ -9,16 +11,36 @@ public class Regenerate : MonoBehaviour
     [SerializeField] private List<Bounds> regenerateAreaB;
     [SerializeField] private List<Bounds> regenerateAreaC;
     [SerializeField] private List<Bounds> regenerateAreaD;
-    [SerializeField] private List<GameObject> regenerateResource;
+    [SerializeField] private List<GameObject> regeneratePrefab;
+
+    public int resourceMaxAmountA;
+    public int resourceMaxAmountB;
+    public int resourceMaxAmountC;
+    public int resourceMaxAmountD;
 
     public int resourceAmountA;
     public int resourceAmountB;
     public int resourceAmountC;
     public int resourceAmountD;
 
+    private void Start()
+    {
+        Respwon();
+    }
     void Respwon()
     {
+        if(regeneratePrefab == null)
+        {
+            Debug.LogError("프리펩이 없습니다!");
+            return;
+        }
+        GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
+        Bounds randomArea = regenerateAreaA[Random.Range(0, regenerateAreaA.Count)];
 
+        Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+
+        Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+        //Debug.Log($"생성 성공!{randomPosition}");
     }
 
     private void OnDrawGizmosSelected()
