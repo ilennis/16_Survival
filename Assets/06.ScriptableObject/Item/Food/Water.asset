@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fa3134a59efd324c9ff6bd7cd106c61, type: 3}
   m_Name: Water
   m_EditorClassIdentifier: 
-  ItemName: 
-  Description: 
+  ItemName: "\uBB3C"
+  Description: "\uAC08\uC99D\uC744 \uD574\uC18C\uD574\uC90D\uB2C8\uB2E4."
   Icon: {fileID: 0}
-  ItemType: 0
-  MaxHaveCount: 0
-  FoodEffects: []
+  ItemType: 1
+  MaxHaveCount: 10
+  FoodEffects:
+  - FoodEffectType: 2
+    Amount: 10
