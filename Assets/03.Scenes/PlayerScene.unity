@@ -242,7 +242,7 @@ Transform:
   m_GameObject: {fileID: 799075496}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -260,6 +260,7 @@ GameObject:
   - component: {fileID: 1365010280}
   - component: {fileID: 1365010279}
   - component: {fileID: 1365010278}
+  - component: {fileID: 1365010281}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -341,6 +342,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 799075497}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1365010281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365010277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37b2fae8956e4834a9c0bcc894a9ffa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 144004239093350956}
+  speed: 1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!1 &1880977945
 GameObject:
   m_ObjectHideFlags: 0
@@ -4069,11 +4087,27 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 6b2fb653-e34a-47d8-83d7-0d9aee1c04ab
     m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 144004239102422095}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnJumpInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 89922dd6-2d67-44be-9c0e-16f8d7021d9d
+    m_ActionName: Player/Jump[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1365010279}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

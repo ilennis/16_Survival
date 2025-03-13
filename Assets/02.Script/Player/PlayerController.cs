@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     private Vector2 curMovementInput;
-    public float jumpPower;
+    public float jumpPower = 5f; // 점프 높이
     public LayerMask groundLayerMask;
 
     [Header("Look")]
@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
             CameraLook();
         }
     }
-
 
     private void Move()
     {
@@ -89,14 +88,19 @@ public class PlayerController : MonoBehaviour
         return false;
     }
 
+    private void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // 기존 Y 속도를 초기화
+        rb.AddForce(Vector3.up * jumpPower, ForceMode.Impulse); // 힘을 추가하여 점프
+    }
+
     public void ToggleCursor(bool toggle)
     {
         Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
         canLook = !toggle;
     }
 
-
-#region Input
+    #region Input
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed) // 이동 키를 누르고 있을 때
@@ -112,6 +116,14 @@ public class PlayerController : MonoBehaviour
     public void OnLookInput(InputAction.CallbackContext context)
     {
         mouseDelta = context.ReadValue<Vector2>();
+    }
+
+    public void OnJumpInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed && IsGrounded())
+        {
+            Jump();
+        }
     }
 
     public void OnCollectInput(InputAction.CallbackContext context)
@@ -137,5 +149,5 @@ public class PlayerController : MonoBehaviour
             Debug.Log("공격");
         }
     }
-#endregion
+    #endregion
 }
