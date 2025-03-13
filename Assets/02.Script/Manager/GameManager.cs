@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
 
     public Player Player { get; set; }
 
+    public Inventory Inventory { get; set; }
+
     private void Awake()
     {
         if (instance == null)
