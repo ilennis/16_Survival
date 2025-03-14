@@ -15,7 +15,8 @@ public class PlayerCondition : MonoBehaviour
     Condition Stamina { get { return uiCondition.stamina; } }
     Condition Level { get { return uiCondition.level; } }
 
-
+    private int level = 1;
+    private int exp = 0;
     public float noHungerHealthDecay;
     public float noThirstHealthDecay;
     public event Action onTakeDamage;
@@ -62,9 +63,10 @@ public class PlayerCondition : MonoBehaviour
         Thirst.Add(amount);
     }
 
-    public void LevelUp()
+    public void GetExp(float amount)
     {
-        levelText.text = "";
+        Level.Add(amount);
+        levelText.text = $"Lv. {level}";
     }
 
     public void Die()

@@ -829,8 +829,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 40, y: 0}
-  m_SizeDelta: {x: -100, y: -20}
+  m_AnchoredPosition: {x: 40, y: -1}
+  m_SizeDelta: {x: -100, y: -22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &464202763
 MonoBehaviour:
@@ -996,7 +996,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.55937433, g: 1, b: 0, a: 0.5882353}
+  m_Color: {r: 0.25855616, g: 0.8490566, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1142,9 +1142,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: {fileID: 80641059}
   hunger: {fileID: 330788964}
-  thirst: {fileID: 0}
+  thirst: {fileID: 1170732222}
   stamina: {fileID: 702616983}
-  level: {fileID: 0}
+  level: {fileID: 981846803}
 --- !u!1 &636572272
 GameObject:
   m_ObjectHideFlags: 0
