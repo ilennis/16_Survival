@@ -41,7 +41,6 @@ public class UIItemInfo : MonoBehaviour
         itemInfoWindow.transform.position = eventData.position + new Vector2(20, -20);
     }
 
-
     private void OnPointerExit(ItemData data, PointerEventData eventData)
     {
         if (data == null) return;

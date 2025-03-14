@@ -1,27 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CheatInventory : MonoBehaviour
 {
-    [SerializeField]
-    private Inventory inventory;
-    
-    [SerializeField]
-    private Button[] cheatButtons;
-
-    [SerializeField]
-    private ItemData[] itemDatas;
-
-    [SerializeField]
-    private int addAxeCount = 1;
-    [SerializeField]
-    private int addWoodCount = 23;
-    [SerializeField]
-    private int addRockCount = 7;
-    [SerializeField]
-    private int UseRockCount = 7;
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private Button[] cheatButtons;
+    [SerializeField] private ItemData[] itemDatas;
+    [SerializeField] private int addAxeCount = 1;
+    [SerializeField] private int addWoodCount = 23;
+    [SerializeField] private int addRockCount = 7;
+    [SerializeField] private int UseRockCount = 7;
+    [SerializeField] private int AddFishCount = 5;
 
     private void Start()
     {
@@ -29,6 +18,7 @@ public class CheatInventory : MonoBehaviour
         cheatButtons[1].onClick.AddListener(AddWood);
         cheatButtons[2].onClick.AddListener(AddRock);
         cheatButtons[3].onClick.AddListener(UseRock);
+        cheatButtons[4].onClick.AddListener(AddFish);
     }
 
     private void AddAxe()
@@ -44,6 +34,11 @@ public class CheatInventory : MonoBehaviour
     private void AddRock()
     {
         inventory.AddItem(itemDatas[2], addRockCount);
+    }
+
+    private void AddFish()
+    {
+        inventory.AddItem(itemDatas[3], AddFishCount);
     }
 
     private void UseRock()
