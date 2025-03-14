@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
             if (instance == null)
             {
                 instance = new GameObject("GameManager").AddComponent<GameManager>();
+                instance.AddComponent<DataManager>();
             }
             return instance;
         }
@@ -17,6 +19,8 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public Player Player { get; set; }
+
+    public Inventory Inventory { get; set; }
 
     private void Awake()
     {
