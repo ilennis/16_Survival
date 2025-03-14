@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class BulidingCost
+public class BuildingCost
 {
     // 코스트
     public string materialName;

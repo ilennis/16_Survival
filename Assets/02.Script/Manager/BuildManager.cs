@@ -60,6 +60,8 @@ public class BuildManager : MonoBehaviour
     }
     void PlaceBuilding()
     {
+        if (currentPreview == null) return;
+        Building buildingData = buildingPrefabs[selectedBuildingIndex].GetComponent<Building>();
         if (!CheckResources(selectedBuildingIndex))
         {
             Debug.Log("Not enough materials!");
