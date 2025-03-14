@@ -24,6 +24,12 @@ public class OneDayCycle : MonoBehaviour
     public AnimationCurve lightingIntensityMultiplier;
     public AnimationCurve reflectionIntensityMultiplier;
 
+    private void Start()
+    {
+        time = startTime;
+        timeRate = 1f / fullDayLength; // 하루 길이를 기준으로 시간 속도 설정
+    }
+
     void Update()
     {
         time = (time + timeRate * Time.deltaTime) % 1f;

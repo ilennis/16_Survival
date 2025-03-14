@@ -29,18 +29,51 @@ public class Regenerate : MonoBehaviour
     }
     void Respwon()
     {
-        if(regeneratePrefab == null)
+        if (regeneratePrefab == null)
         {
             Debug.LogError("프리펩이 없습니다!");
             return;
         }
-        GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
-        Bounds randomArea = regenerateAreaA[Random.Range(0, regenerateAreaA.Count)];
+        for (; resourceAmountA < resourceMaxAmountA; resourceAmountA++)
+        {
+            GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
+            Bounds randomArea = regenerateAreaA[Random.Range(0, regenerateAreaA.Count)];
 
-        Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
 
-        Instantiate(randomPrefab, randomPosition, Quaternion.identity);
-        //Debug.Log($"생성 성공!{randomPosition}");
+            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            //Debug.Log($"생성 성공!{randomPosition}");
+        }
+        for (; resourceAmountB < resourceMaxAmountB; resourceAmountB++)
+        {
+            GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
+            Bounds randomArea = regenerateAreaB[Random.Range(0, regenerateAreaB.Count)];
+
+            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+
+            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            //Debug.Log($"생성 성공!{randomPosition}");
+        }
+        for (; resourceAmountC < resourceMaxAmountC; resourceAmountC++)
+        {
+            GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
+            Bounds randomArea = regenerateAreaC[Random.Range(0, regenerateAreaC.Count)];
+
+            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+
+            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            //Debug.Log($"생성 성공!{randomPosition}");
+        }
+        //for (; resourceAmountA < resourceMaxAmountD; resourceAmountD++)
+        //{
+        //    GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
+        //    Bounds randomArea = regenerateAreaD[Random.Range(0, regenerateAreaD.Count)];
+
+        //    Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+
+        //    Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+        //    //Debug.Log($"생성 성공!{randomPosition}");
+        //}
     }
 
     private void OnDrawGizmosSelected()
