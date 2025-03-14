@@ -112,6 +112,7 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+<<<<<<< Updated upstream
     "com.unity.inputsystem": {
       "version": "1.7.0",
       "depth": 0,
@@ -121,6 +122,8 @@
       },
       "url": "https://packages.unity.com"
     },
+=======
+>>>>>>> Stashed changes
     "com.unity.mathematics": {
       "version": "1.2.6",
       "depth": 1,
