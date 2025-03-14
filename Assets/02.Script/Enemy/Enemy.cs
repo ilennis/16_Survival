@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyAI : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private NavMeshAgent navMeshAgent;  // NavMeshAgent 변수
     private Transform targetPlayer;     // 플레이어의 위치를 나타내는 변수 이름을 변경
