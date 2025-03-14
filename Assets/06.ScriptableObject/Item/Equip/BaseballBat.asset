@@ -16,8 +16,9 @@ MonoBehaviour:
   Description: 
   Icon: {fileID: 21300000, guid: 51f175d61fdaebb46813033b8c9fbf7d, type: 3}
   ItemType: 0
-  MaxHaveCount: 1
-  AttackDamage: 0
+  CellMaxHaveCount: 0
+  ItemPrefab: {fileID: 0}
+  AttackDamage: 20
   ResourceDamage: 5
   AttackSpeed: 0
   CraftingRecipes: []

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Stone
   m_EditorClassIdentifier: 
   ItemName: "\uB3CC"
-  Description: 
+  Description: "\uBB34\uAE30,\uAC74\uCD95\uC5D0 \uC4F0\uC785\uB2C8\uB2E4."
   Icon: {fileID: 21300000, guid: 583675a75bcb2a941ac555b9ccd513a9, type: 3}
   ItemType: 2
   CellMaxHaveCount: 5
+  ItemPrefab: {fileID: 0}
