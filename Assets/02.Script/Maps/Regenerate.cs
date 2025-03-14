@@ -6,22 +6,21 @@ using Random = UnityEngine.Random;
 
 public class Regenerate : MonoBehaviour
 {
+
+
     [Header("RegenerateArea")]
     [SerializeField] private List<Bounds> regenerateAreaA;
     [SerializeField] private List<Bounds> regenerateAreaB;
     [SerializeField] private List<Bounds> regenerateAreaC;
-    [SerializeField] private List<Bounds> regenerateAreaD;
     [SerializeField] private List<GameObject> regeneratePrefab;
 
     public int resourceMaxAmountA;
     public int resourceMaxAmountB;
     public int resourceMaxAmountC;
-    public int resourceMaxAmountD;
 
     public int resourceAmountA;
     public int resourceAmountB;
     public int resourceAmountC;
-    public int resourceAmountD;
 
     private void Start()
     {
@@ -64,16 +63,6 @@ public class Regenerate : MonoBehaviour
             Instantiate(randomPrefab, randomPosition, Quaternion.identity);
             //Debug.Log($"생성 성공!{randomPosition}");
         }
-        //for (; resourceAmountA < resourceMaxAmountD; resourceAmountD++)
-        //{
-        //    GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
-        //    Bounds randomArea = regenerateAreaD[Random.Range(0, regenerateAreaD.Count)];
-
-        //    Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
-
-        //    Instantiate(randomPrefab, randomPosition, Quaternion.identity);
-        //    //Debug.Log($"생성 성공!{randomPosition}");
-        //}
     }
 
     private void OnDrawGizmosSelected()
@@ -90,10 +79,6 @@ public class Regenerate : MonoBehaviour
         {
             return;
         }
-        if (regenerateAreaD == null)
-        {
-            return;
-        }
         foreach (var area in regenerateAreaA)
         {
             Gizmos.color = Color.red;
@@ -107,11 +92,6 @@ public class Regenerate : MonoBehaviour
         foreach (var area in regenerateAreaC)
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(area.center, area.size);
-        }
-        foreach (var area in regenerateAreaD)
-        {
-            Gizmos.color = Color.yellow;
             Gizmos.DrawWireCube(area.center, area.size);
         }
     }
