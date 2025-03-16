@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField]  private Transform inventoryList;
-    public UIItemInfo UIItemInfo; 
+    [SerializeField] private Transform inventoryList;
+    public UIItemInfo UIItemInfo;
     public UIUseItem UIUseItem;
     public SlotDragAndDrop SlotDragAndDrop;
 
@@ -22,6 +22,11 @@ public class Inventory : MonoBehaviour
         inventorySlotList = inventoryList.GetComponentsInChildren<InventorySlot>();
         haveItemCountList = dataManager.HaveItemCountList;
     }
+
+    //아이템 소지여부를 반환
+    public bool IsHasItem(ItemType type) => haveItemCountList.ContainsKey(type);
+    //아이템 소지수를 반환
+    public int GetHasItemAmount(ItemType type) => IsHasItem(type) ? haveItemCountList[type] : 0;  
     //아이템을 인벤토리에 추가
     public void AddItem(ItemData itemData, int amount)
     {
@@ -38,10 +43,10 @@ public class Inventory : MonoBehaviour
             int addAmount = CalculateAddAmount(slot, itemData, remainingAmount); // 추가 가능한 아이템수 계산
             AddItemToSlot(slot, itemData, addAmount); // 슬롯에 아이템 추가
             UpdateNotEmptySlotList(slot, itemData); //슬롯 아이템 리스트 업데이트
-            remainingAmount -= addAmount; 
+            remainingAmount -= addAmount;
         }
         UpdateHaveItemCountList(itemData, amount); //가지고 있는 아이템수 리스트 업데이트
-    }   
+    }
     //추가할 아이템 개수 계산
     private int CalculateAddAmount(InventorySlot slot, ItemData itemData, int remainingAmount)
     {
@@ -63,7 +68,7 @@ public class Inventory : MonoBehaviour
         }
         else
         {
-            notEmptySlotList.Add(itemData.ItemType, new List<InventorySlot> { slot }); 
+            notEmptySlotList.Add(itemData.ItemType, new List<InventorySlot> { slot });
         }
     }
     private void UpdateHaveItemCountList(ItemData itemData, int amount)
@@ -88,7 +93,7 @@ public class Inventory : MonoBehaviour
             case ItemType.Resource:
                 ConsumeItem(itemData, useAmount);
                 break;
-            case ItemType.Food:       
+            case ItemType.Food:
                 // 아이템 사용 로직
                 if (itemData is FoodData food)
                 {
