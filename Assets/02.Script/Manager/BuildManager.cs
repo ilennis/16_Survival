@@ -62,6 +62,11 @@ public class BuildManager : MonoBehaviour
     {
         if (currentPreview == null) return;
         Building buildingData = buildingPrefabs[selectedBuildingIndex].GetComponent<Building>();
+        if (buildingData == null)
+        {
+            Debug.Log("Invalid building data!");
+            return;
+        }
         if (!CheckResources(selectedBuildingIndex))
         {
             Debug.Log("Not enough materials!");
@@ -84,7 +89,7 @@ public class BuildManager : MonoBehaviour
 
     bool CheckResources(int buildingIndex)
     {
-        // 인벤토리 확인 용도. 
+        // 인벤토리 확인 용도. 이건 좀 나중에 인벤토리 시스템 어떻게 돌아가는지 확인 필요
         return true;
     }
     bool DeductResources(int buildingIndex)
