@@ -8,6 +8,8 @@ public class Condition : MonoBehaviour
     public float startValue;
     public float passiveValue;
     public Image uiBar;
+    public float speed = 10f;
+    public bool isLevel; // 최대값을 넘을 수 있음 (레벨)
 
     private void Start()
     {
@@ -16,12 +18,33 @@ public class Condition : MonoBehaviour
 
     private void Update()
     {
-        uiBar.fillAmount = GetPercentage();
+        if (isLevel)
+        {
+            if (uiBar.fillAmount > GetPercentage())
+            {
+                uiBar.fillAmount = Mathf.Lerp(0f, GetPercentage(), Time.deltaTime * speed);
+            }
+            else
+            {
+                uiBar.fillAmount = Mathf.Lerp(uiBar.fillAmount, GetPercentage(), Time.deltaTime * speed);
+            }
+        }
+        else
+        {
+            uiBar.fillAmount = GetPercentage();
+        }
     }
 
     public void Add(float amount)
     {
-        curValue = Mathf.Min(curValue + amount, maxValue);
+        if (isLevel)
+        {
+            curValue += amount;
+        }
+        else
+        {
+            curValue = Mathf.Min(curValue + amount, maxValue);
+        }
     }
 
     public void Subtract(float amount)

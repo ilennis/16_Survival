@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public interface IDamage
 {
@@ -19,9 +20,11 @@ public class PlayerCondition : MonoBehaviour, IDamage
     Condition Stamina { get { return uiCondition.stamina; } }
     Condition Level { get { return uiCondition.level; } }
 
-
+    public int level = 1;
+    public float levelUpBonus = 20f;
     public float noHungerHealthDecay;
     public float noThirstHealthDecay;
+    public bool useStamina;
     public event Action onTakeDamage;
 
     private void Update()
@@ -29,6 +32,11 @@ public class PlayerCondition : MonoBehaviour, IDamage
         Hunger.Subtract(Hunger.passiveValue * Time.deltaTime);
         Thirst.Subtract(Thirst.passiveValue * Time.deltaTime);
         Stamina.Add(Stamina.passiveValue * Time.deltaTime);
+
+        if (useStamina)
+        {
+            Stamina.Subtract(Stamina.passiveValue * 3f * Time.deltaTime);
+        }
 
         if (Hunger.curValue <= 0f)
         {
@@ -49,6 +57,18 @@ public class PlayerCondition : MonoBehaviour, IDamage
         {
             Die();
         }
+
+        levelText.text = $"Lv. {level}";
+
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            GetExp(20f);
+        }
+    }
+
+    public void Damage(float amount)
+    {
+        Health.Subtract(amount);
     }
 
     public void Heal(float amount)
@@ -66,14 +86,39 @@ public class PlayerCondition : MonoBehaviour, IDamage
         Thirst.Add(amount);
     }
 
-    public void LevelUp()
+    public void GetExp(float amount)
     {
-        levelText.text = "";
+        Level.Add(amount);
+        
+        if (Level.curValue >= Level.maxValue)
+        {
+            Level.curValue = Level.curValue - Level.maxValue;
+            LevelUp();
+        }
+    }
+
+    private void LevelUp()
+    {
+        level++;
+        Level.maxValue *= 1.1f;
+
+        // 필요할 경우 레벨업 관련 기능 추가
+        Health.maxValue += levelUpBonus;
+        Health.Add(levelUpBonus);
+
+        Hunger.maxValue += levelUpBonus;
+        Hunger.Add(levelUpBonus);
+
+        Thirst.maxValue += levelUpBonus;
+        Thirst.Add(levelUpBonus);
+
+        Stamina.maxValue += levelUpBonus;
+        Stamina.Add(levelUpBonus);
     }
 
     public void Die()
     {
-        Debug.Log("플레이어가 죽었다.");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void TakeDamage(int damageAmount)
