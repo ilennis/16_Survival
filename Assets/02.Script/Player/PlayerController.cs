@@ -11,9 +11,12 @@ public class PlayerController : MonoBehaviour
     private Vector2 curMovementInput;
     public float jumpPower = 5f; // 점프 높이
     public LayerMask groundLayerMask;
+    private float runSpeed;
 
     [Header("Look")]
     public Transform cameraContainer;
+    public float cameraChangeSpeed = 5f;
+    public float cameraDistance = 5f;
     public float minXLook;
     public float maxXLook;
     private float camCurXRot;
@@ -24,16 +27,31 @@ public class PlayerController : MonoBehaviour
     [HideInInspector]
     public bool canLook = true;
 
+    private Camera cam;
     private Rigidbody rb;
+    private PlayerCondition condition;
 
     private void Awake()
     {
+        cam = Camera.main;
         rb = GetComponent<Rigidbody>();
+        condition = GetComponent<PlayerCondition>();
     }
 
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void Update()
+    {
+        // cam.transform.localPosition = Vector3.Lerp(cam.transform.localPosition, new Vector3(0f,0f, -cameraDistance), Time.deltaTime * cameraChangeSpeed);
+
+        if (condition.uiCondition.stamina.GetPercentage() <= 0f)
+        {
+            condition.useStamina = false;
+            runSpeed = 0f;
+        }
     }
 
     private void FixedUpdate()
@@ -52,7 +70,7 @@ public class PlayerController : MonoBehaviour
     private void Move()
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= moveSpeed + runSpeed;
         dir.y = rb.velocity.y;
 
         rb.velocity = dir;
@@ -148,6 +166,28 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("공격");
         }
+    }
+
+    public void OnRunInput(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            condition.useStamina = true;
+            runSpeed = moveSpeed;
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            condition.useStamina = false;
+            runSpeed = 0f;
+        }
+    }
+
+    public void OnCameraInput(InputAction.CallbackContext context)
+    {
+        // if (context.phase == InputActionPhase.Performed)
+        // {
+        //     cameraDistance = cameraDistance == 0f ? 5f : 0f;
+        // }
     }
     #endregion
 }
