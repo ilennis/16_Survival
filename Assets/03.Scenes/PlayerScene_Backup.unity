@@ -2163,7 +2163,7 @@ Transform:
   m_GameObject: {fileID: 1365010277}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2176,7 +2176,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365010277}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37b2fae8956e4834a9c0bcc894a9ffa1, type: 3}
   m_Name: 
@@ -6508,7 +6508,6 @@ MonoBehaviour:
   uiCondition: {fileID: 628846856}
   levelText: {fileID: 81712093}
   level: 1
-  levelUpBonus: 50
   noHungerHealthDecay: 2
   noThirstHealthDecay: 0
   useStamina: 0
