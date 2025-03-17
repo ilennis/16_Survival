@@ -8,8 +8,9 @@ public class BuildManager : MonoBehaviour
     public Camera playerCamera;
     public GameObject[] buildingPrefabs; // 빌딩 Prefab. 리스트
     public GameObject placementIndicator; // 가능하면 구현. 투명한 모양으로 빌딩 건설 Preview
+
     public LayerMask groundLayerMask; // 땅에 Raycast 닿으면 구현
-    public int selectedBuildingIndex = 0;
+    public int selectedBuildingIndex = -1;
     public float maxPlacementDistance = 5f;
     public Text errorText;
 
@@ -62,6 +63,11 @@ public class BuildManager : MonoBehaviour
     {
         if (currentPreview == null) return;
         Building buildingData = buildingPrefabs[selectedBuildingIndex].GetComponent<Building>();
+        if (buildingData == null)
+        {
+            Debug.Log("Invalid building data!");
+            return;
+        }
         if (!CheckResources(selectedBuildingIndex))
         {
             Debug.Log("Not enough materials!");
@@ -75,6 +81,14 @@ public class BuildManager : MonoBehaviour
             Destroy(currentPreview);
         }
     }
+    public void SetBuilding(int index) // 인덱스에 빌딩 아이콘 만들기
+    {
+        if (index >= 0 && index < buildingPrefabs.Length)
+        {
+            selectedBuildingIndex = index;
+            // BuildingUI.Instance.UpdateBuildingUI(buildingPrefabs[index].GetComponent<Building>());
+        }
+    }
     Vector3 GetSnappedPosition(Vector3 rawPosition) // 정수 값으로만 딱딱 이동할 수 있도록 만드는 Vector3 값
     {
         float x = Mathf.Round(rawPosition.x / spaceSize) * spaceSize;
@@ -84,7 +98,7 @@ public class BuildManager : MonoBehaviour
 
     bool CheckResources(int buildingIndex)
     {
-        // 인벤토리 확인 용도. 
+        // 인벤토리 확인 용도. 이건 좀 나중에 인벤토리 시스템 어떻게 돌아가는지 확인 필요
         return true;
     }
     bool DeductResources(int buildingIndex)
