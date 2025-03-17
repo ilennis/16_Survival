@@ -5,7 +5,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class PlayerCondition : MonoBehaviour
+public interface IDamage
+{
+    void TakeDamage(int damageAmount);
+}
+public class PlayerCondition : MonoBehaviour, IDamage
 {
     public UICondition uiCondition;
     public TextMeshProUGUI levelText;
@@ -115,5 +119,10 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        Health.Subtract(damageAmount);
     }
 }
