@@ -37,6 +37,14 @@ public class Enemy : MonoBehaviour
 
     private Coroutine attackCoroutine;     // 공격 반복을 위한 Coroutine
 
+    // 체력, 공격력, 경험치
+    public float health = 100f;            // 적의 체력
+    public float attackPower = 10f;        // 적의 공격력
+    public float experiencePoints = 50f;   // 적이 주는 경험치
+    public float attackSpeed = 1f;         // 공격 속도 (초 단위)
+
+    public GameObject itemDropPrefab;      // 죽을 때 떨어뜨릴 아이템 프리팹
+
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -87,6 +95,11 @@ public class Enemy : MonoBehaviour
         if (targetPlayer == null || navMeshAgent == null)
             return;
 
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            TakeDamage(health); // 체력을 즉시 0으로 만들기
+        }
+
         // 플레이어와의 거리 계산
         float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
 
@@ -135,6 +148,21 @@ public class Enemy : MonoBehaviour
 
             if (attackCoroutine == null)
                 attackCoroutine = StartCoroutine(AttackRepeat());
+        }
+
+        // Attack 상태에서 플레이어가 멀어지면 Run 상태로 전환
+        if (currentState == State.Attack && distanceToPlayer > stopDistance)
+        {
+            currentState = State.Run;
+            navMeshAgent.isStopped = false;
+            animator.SetBool("isRunning", true);
+            animator.SetBool("isIdle", false);
+
+            if (attackCoroutine != null)
+            {
+                StopCoroutine(attackCoroutine);
+                attackCoroutine = null;
+            }
         }
     }
 
@@ -215,31 +243,60 @@ public class Enemy : MonoBehaviour
         while (currentState == State.Attack)
         {
             animator.SetTrigger("Attack");
-            yield return new WaitForSeconds(1f);
+
+            // 플레이어에게 데미지 주기
+            // 플레이어의 체력을 직접 수정하는 코드
+            if (targetPlayer != null)
+            {
+                // 플레이어와의 거리 확인
+                float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
+                if (distanceToPlayer <= attackDistance)
+                {
+                    // 플레이어의 체력을 직접 수정
+                    Player player = targetPlayer.GetComponent<Player>();
+                    if (player != null)
+                    {
+                      //  player.health -= attackPower; // 공격력만큼 체력 감소
+                        GainExperienceToPlayer(player); // 경험치 추가
+                    }
+                }
+            }
+
+            // 공격 속도에 따라 대기
+            yield return new WaitForSeconds(attackSpeed);
         }
     }
 
     private void Attack()
     {
         animator.SetTrigger("Attack");
-        Invoke("FinishAttack", 2f);
-    }
-
-    private void FinishAttack()
-    {
-        currentState = State.Idle;
-        animator.SetBool("isWalking", false);
-        animator.SetBool("isRunning", false);
-        animator.SetBool("isIdle", true);
-        navMeshAgent.isStopped = false;
-        SetRandomPatrolPosition();
-        navMeshAgent.SetDestination(randomPatrolPosition);
     }
 
     private void Die()
     {
         animator.SetTrigger("Die");
         navMeshAgent.isStopped = true;
+
+        // 아이템 드롭
+        if (itemDropPrefab != null)
+        {
+            Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
+        }
+
+        // 적 오브젝트 제거
+        Destroy(gameObject, 2f); // 2초 후에 오브젝트 제거
+    }
+
+    // 데미지를 받는 함수
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        if (health <= 0)
+        {
+            currentState = State.Die;
+            Die();
+        }
     }
 
     private void SetRandomPatrolPosition()
@@ -249,5 +306,14 @@ public class Enemy : MonoBehaviour
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, 10f, NavMesh.AllAreas);
         randomPatrolPosition = hit.position;
+    }
+
+    // 플레이어에게 경험치를 직접 추가하는 함수
+    private void GainExperienceToPlayer(Player player)
+    {
+        if (player != null)
+        {
+          //  player.experience += experiencePoints; // 경험치 추가
+        }
     }
 }
