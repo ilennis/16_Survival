@@ -3,16 +3,16 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
     public WeaponData Data;
-    private Camera camera;
+    private Camera weaponCamera;
 
     private void Start()
     {
-        camera = Camera.main;
+        weaponCamera = Camera.main;
     }
 
     public void OnHit()
     {
-        Ray ray = camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
+        Ray ray = weaponCamera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit, 0.1f))
