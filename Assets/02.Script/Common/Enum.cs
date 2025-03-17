@@ -21,3 +21,9 @@ public enum ConditionType
     PlayerLevel //플레이어 레벨
 }
 
+public enum DamageType
+{
+    Resource,
+    Enemy
+}
+

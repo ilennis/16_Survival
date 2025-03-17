@@ -104,7 +104,7 @@ public class Inventory : MonoBehaviour
         }
     }
     //아이템 추가 가능한 슬롯 찾기
-    private InventorySlot GetCanAddItemSlot(ItemData itemData)
+    public InventorySlot GetCanAddItemSlot(ItemData itemData)
     {
         foreach (var cell in inventorySlotList)
         {

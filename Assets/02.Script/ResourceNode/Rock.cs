@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class Rock : MonoBehaviour, IInteractable
 {
-    [SerializeField]
-    private ItemData resourceData; //획득 자원 데이터
+    [SerializeField] private ItemData resourceData; //획득 자원 데이터
+    [SerializeField] private ResourceNodeData NodeData; //채집 가능한 오브젝트 데이터
 
-    [SerializeField]
-    private ResourceNodeData NodeData; //채집 가능한 오브젝트 데이터
+    private Inventory inventory;
 
     private int rockHp;
     private int rockYield;
@@ -15,6 +14,8 @@ public class Rock : MonoBehaviour, IInteractable
     {
         rockHp = NodeData.Hp;
         rockYield = NodeData.Yield;
+
+        inventory = GameManager.Instance.Inventory;
     }
 
     public string GetInfo()
@@ -23,12 +24,13 @@ public class Rock : MonoBehaviour, IInteractable
         return $" F키를 눌러 채집";
     }
 
-    //상호 작용 실행
-    public void Interact()
+    public void Collect()
     {
+        if (!inventory.GetCanAddItemSlot(resourceData)) return;
+        
         rockHp -= rockYield;
-        //TODO : 인벤토리에 추가
-        //TODO : 인벤토리에 아이템을 최대소지수 만큼 가지고 있으면 채집 불가
+        inventory.AddItem(resourceData, rockYield);
+        
         Debug.Log($"인벤토리에{resourceData.ItemName}을 인벤토리에 추가하였습니다!");
 
         if (rockHp <= 0) //더이상 채집 불가능하면

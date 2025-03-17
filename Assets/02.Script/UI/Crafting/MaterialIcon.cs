@@ -9,11 +9,11 @@ public class MaterialIcon : MonoBehaviour
 
     private CraftingMaterial materialData;
 
-    public void SetIcon(CraftingMaterial data, bool isCrafted)
+    public void SetIcon(CraftingMaterial data,bool isCanUnlock ,bool isCrafted)
     {
         materialData = data;
         materialIconImage.sprite = materialData.Item.Icon;
-        if (isCrafted) //제작 완료 상태이면
+        if (isCrafted || !isCanUnlock) //제작 완료 상태이면
         {
             materialAmountText.gameObject.SetActive(false);
             return;

@@ -33,7 +33,7 @@ public class CraftingCell : MonoBehaviour
 
     private void SetCrafringCell()
     {
-        bool isCanUnlock = craftingRecipe.IsCanUnlock(); 
+        bool isCanUnlock = craftingRecipe.IsCanUnlock();
         lockedPanel.gameObject.SetActive(!isCanUnlock); //해방 가능 여부에 따라 해방이미지 활성화여부 결정
         if (craftingRecipe.IsCrafted()) //제작이 완료되어있으면
         {
@@ -42,28 +42,28 @@ public class CraftingCell : MonoBehaviour
         }
         SetIcon(); // 아이콘 설정
         if (!isCanUnlock) //해방이 불가능하면
-        {           
+        {
             unlockConditionText.text = $"{craftingRecipe.GetUnlockConditionText()}"; //해방 조건 표시
             return;
         }
         craftButton.interactable = craftingRecipe.IsCanCraft(); // 제작 가능 여부에 따라 제작 버튼 활성화 여부 결정
     }
 
-    private void SetIcon(bool isCrafted=false)
+    private void SetIcon()
     {
         craftItemImage.sprite = craftingRecipe.CraftItem.Icon;
 
         for (int i = 0; i < craftingRecipe.Materials.Length; i++)
         {
             materialIcons[i].gameObject.SetActive(true);
-            materialIcons[i].SetIcon(craftingRecipe.Materials[i], isCrafted);
+            materialIcons[i].SetIcon(craftingRecipe.Materials[i], craftingRecipe.IsCanUnlock(), craftingRecipe.IsCrafted());
         }
     }
 
     //아이템 제작
     private void CraftItem()
     {
-        foreach(var material in CraftingRecipe.Materials)
+        foreach (var material in CraftingRecipe.Materials)
         {
             inventory.UseItem(material.Item, material.Amount);  //재료 사용
         }
@@ -80,6 +80,6 @@ public class CraftingCell : MonoBehaviour
     private void ChangeCraftedState()
     {
         craftedPanel.gameObject.SetActive(true);
-        SetIcon(craftingRecipe.IsCrafted());
+        SetIcon();
     }
 }

@@ -19,11 +19,23 @@ public class CheatInventory : MonoBehaviour
         cheatButtons[2].onClick.AddListener(AddRock);
         cheatButtons[3].onClick.AddListener(UseRock);
         cheatButtons[4].onClick.AddListener(AddFish);
+        cheatButtons[5].onClick.AddListener(AddBat);
+        cheatButtons[6].onClick.AddListener(AddKnife);
     }
 
     private void AddAxe()
     {
         inventory.AddItem(itemDatas[0], addAxeCount);
+    }
+
+    private void AddBat()
+    {
+        inventory.AddItem(itemDatas[5], addAxeCount);
+    }
+
+    private void AddKnife()
+    {
+        inventory.AddItem(itemDatas[4], addAxeCount);
     }
 
     private void AddWood()

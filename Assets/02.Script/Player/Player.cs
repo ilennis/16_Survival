@@ -4,6 +4,9 @@ public class Player : MonoBehaviour
 {
     public PlayerController controller;
     public PlayerCondition condition;
+    public WeaponController WeaponController;
+
+
     private void Awake()
     {
         GameManager.Instance.Player = this;
@@ -11,5 +14,6 @@ public class Player : MonoBehaviour
 
         controller = GetComponent<PlayerController>();
         condition = GetComponent<PlayerCondition>();
+        WeaponController = GetComponent<WeaponController>();
     }
 }

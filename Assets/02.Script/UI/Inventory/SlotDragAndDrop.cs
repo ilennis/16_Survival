@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 public class SlotDragAndDrop : MonoBehaviour
 {
-    [SerializeField]
-    private Image dragImage;
+    [SerializeField] private Image dragImage;
     private InventorySlot dragCell;
 
     public Action<InventorySlot, PointerEventData> OnBeginDragEvent = delegate { };
     public Action<InventorySlot, PointerEventData> OnDragEvent = delegate { };
     public Action<InventorySlot, PointerEventData> OnEndDragEvent = delegate { };
     public Action<InventorySlot, PointerEventData> OnDropEvent = delegate { };
+    public Action<WeaponSlot, PointerEventData> OnDropWeaponEvent = delegate { };
 
     private void OnEnable()
     {
@@ -20,6 +20,7 @@ public class SlotDragAndDrop : MonoBehaviour
         OnDragEvent += OnDrag;
         OnBeginDragEvent += OnBeginDrag;
         OnEndDragEvent += OnEndDrag;
+        OnDropWeaponEvent += OnDropWeapon;
     }
 
     private void OnDisable()
@@ -28,6 +29,7 @@ public class SlotDragAndDrop : MonoBehaviour
         OnDragEvent -= OnDrag;
         OnBeginDragEvent -= OnBeginDrag;
         OnEndDragEvent -= OnEndDrag;
+        OnDropWeaponEvent -= OnDropWeapon;
     }
 
     private void OnDrag(InventorySlot cell, PointerEventData eventData)
@@ -38,7 +40,35 @@ public class SlotDragAndDrop : MonoBehaviour
 
     private void OnDrop(InventorySlot cell, PointerEventData eventData)
     {
-        if (cell.ItemData != null || dragCell==null) return;
+        HandleDrop(cell);
+    }
+
+    private void OnDropWeapon(WeaponSlot cell, PointerEventData eventData)
+    {
+        HandleDrop(cell);
+    }
+
+    private void HandleDrop(InventorySlot cell)
+    {
+        if (cell.ItemData != null || dragCell == null) return;
+
+        if (dragCell.ItemData is WeaponData weapon && dragCell is WeaponSlot slot)
+        {
+            slot.ClearWeapon(slot.SlotIndex, weapon);
+        }
+
+        if (cell is WeaponSlot weaponCell)
+        {
+            if (dragCell.ItemData is WeaponData weaponData)
+            {
+                weaponCell.SetWeapon(weaponCell.SlotIndex, weaponData);
+            }
+            else
+            {
+                return;
+            }
+        }
+
         cell.ItemData = dragCell.ItemData;
         cell.HaveAmount = dragCell.HaveAmount;
         dragCell.ItemData = null;
