@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ItemName: "\uCE7C"
   Description: "\uACF5\uACA9\uB825 +10"
-  Icon: {fileID: 21300000, guid: 814cee102e4557845b0c9bb0ce088f1e, type: 3}
+  Icon: {fileID: 21300000, guid: c93eb9ff122374c488890aad7cf1dbac, type: 3}
   ItemType: 0
-  CellMaxHaveCount: 0
-  ItemPrefab: {fileID: 0}
+  CellMaxHaveCount: 1
+  ItemPrefab: {fileID: 1266747339009845344, guid: 007b8fe53e0a8d946aa9c2c44ae99fbf, type: 3}
   AttackDamage: 10
   ResourceDamage: 2
   AttackSpeed: 0
-  CraftingRecipes: []

@@ -15,3 +15,15 @@ public enum FoodEffectType
     SpeedBoost,           // 스피드 상승
 }
 
+//레시피 해방 조건
+public enum ConditionType
+{
+    PlayerLevel //플레이어 레벨
+}
+
+public enum DamageType
+{
+    Resource,
+    Enemy
+}
+

@@ -10,9 +10,9 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private UIItemInfo uiItemInfo;
     private UIUseItem uiUseItem;
-    private SlotDragAndDrop slotDragAndDrop;
+    protected SlotDragAndDrop slotDragAndDrop;
 
-    private void Start()
+    protected virtual void Start()
     {
         uiItemInfo = GameManager.Instance.Inventory.UIItemInfo;
         uiUseItem = GameManager.Instance.Inventory.UIUseItem;
@@ -48,7 +48,7 @@ public class InventorySlot : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     //드래그 중 호출되는 이벤트
     public void OnDrag(PointerEventData eventData) => slotDragAndDrop.OnDragEvent?.Invoke(this, eventData);
     //드롭시 호출되는 이벤트
-    public void OnDrop(PointerEventData eventData) => slotDragAndDrop.OnDropEvent?.Invoke(this, eventData);
+    public virtual void OnDrop(PointerEventData eventData) => slotDragAndDrop.OnDropEvent?.Invoke(this, eventData);
     //드래그 앤 드롭이 끝났을때 호출되는 함수
     public void OnEndDrag(PointerEventData eventData) => slotDragAndDrop.OnEndDragEvent?.Invoke(this, eventData);
     //아이템 클릭시 호출되는 이벤트
