@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerCondition : MonoBehaviour
 {
@@ -113,6 +114,6 @@ public class PlayerCondition : MonoBehaviour
 
     public void Die()
     {
-        Debug.Log("플레이어가 죽었다.");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
