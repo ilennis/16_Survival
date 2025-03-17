@@ -8,8 +8,9 @@ public class BuildManager : MonoBehaviour
     public Camera playerCamera;
     public GameObject[] buildingPrefabs; // 빌딩 Prefab. 리스트
     public GameObject placementIndicator; // 가능하면 구현. 투명한 모양으로 빌딩 건설 Preview
+
     public LayerMask groundLayerMask; // 땅에 Raycast 닿으면 구현
-    public int selectedBuildingIndex = 0;
+    public int selectedBuildingIndex = -1;
     public float maxPlacementDistance = 5f;
     public Text errorText;
 
@@ -78,6 +79,14 @@ public class BuildManager : MonoBehaviour
             Instantiate(buildingPrefabs[selectedBuildingIndex], currentPreview.transform.position, currentRotation);
             DeductResources(selectedBuildingIndex);
             Destroy(currentPreview);
+        }
+    }
+    public void SetBuilding(int index) // 인덱스에 빌딩 아이콘 만들기
+    {
+        if (index >= 0 && index < buildingPrefabs.Length)
+        {
+            selectedBuildingIndex = index;
+            // BuildingUI.Instance.UpdateBuildingUI(buildingPrefabs[index].GetComponent<Building>());
         }
     }
     Vector3 GetSnappedPosition(Vector3 rawPosition) // 정수 값으로만 딱딱 이동할 수 있도록 만드는 Vector3 값
