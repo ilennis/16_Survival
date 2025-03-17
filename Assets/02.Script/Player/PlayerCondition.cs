@@ -4,7 +4,11 @@ using System;
 using UnityEngine;
 using TMPro;
 
-public class PlayerCondition : MonoBehaviour
+public interface IDamage
+{
+    void TakeDamage(int damageAmount);
+}
+public class PlayerCondition : MonoBehaviour, IDamage
 {
     public UICondition uiCondition;
     public TextMeshProUGUI levelText;
@@ -70,5 +74,10 @@ public class PlayerCondition : MonoBehaviour
     public void Die()
     {
         Debug.Log("플레이어가 죽었다.");
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        Health.Subtract(damageAmount);
     }
 }
