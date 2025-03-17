@@ -5,7 +5,6 @@ using UnityEngine;
 public class RegenerateAttribute : MonoBehaviour
 {
     public OneDayCycle dayCycle;
-    //public Regenerate regenerate;
 
     private void Awake()
     {

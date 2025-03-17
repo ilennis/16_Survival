@@ -39,7 +39,11 @@ public class Regenerate : MonoBehaviour
 
             Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
 
-            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
+            ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
+
+            regenObject.regenerate = this;
+            regenObject.areaCode = 1001;
             //Debug.Log($"생성 성공!{randomPosition}");
         }
         for (; resourceAmountB < resourceMaxAmountB; resourceAmountB++)
@@ -49,7 +53,11 @@ public class Regenerate : MonoBehaviour
 
             Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
 
-            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
+            ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
+
+            regenObject.regenerate = this;
+            regenObject.areaCode = 1002;
             //Debug.Log($"생성 성공!{randomPosition}");
         }
         for (; resourceAmountC < resourceMaxAmountC; resourceAmountC++)
@@ -59,7 +67,11 @@ public class Regenerate : MonoBehaviour
 
             Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
 
-            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
+            ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
+
+            regenObject.regenerate = this;
+            regenObject.areaCode = 1003;
             //Debug.Log($"생성 성공!{randomPosition}");
         }
     }
