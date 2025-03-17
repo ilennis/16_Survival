@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Tree : MonoBehaviour, IInteractable, IDamageable
+public class TreeDate : MonoBehaviour, IInteractable, IDamageable
 {
     [SerializeField] private ItemData resourceData; //획득 자원 데이터
     [SerializeField] private ResourceNodeData NodeData; //채집 가능한 오브젝트 데이터
