@@ -6,13 +6,12 @@ using Random = UnityEngine.Random;
 
 public class Regenerate : MonoBehaviour
 {
-
-
     [Header("RegenerateArea")]
     [SerializeField] private List<Bounds> regenerateAreaA;
     [SerializeField] private List<Bounds> regenerateAreaB;
-    [SerializeField] private List<Bounds> regenerateAreaC;
+    [SerializeField] private List<Bounds> regenerateAreaC;//위의 List를 다시 List에 넣을 수 있을까?
     [SerializeField] private List<GameObject> regeneratePrefab;
+    [SerializeField] private float _regenerateStartTime;
 
     public int resourceMaxAmountA;
     public int resourceMaxAmountB;
@@ -24,7 +23,7 @@ public class Regenerate : MonoBehaviour
 
     private void Start()
     {
-        Respwon();
+        InvokeRepeating("Respwon", _regenerateStartTime, RegenerateManager.Instance.RegenerateAttribute.dayCycle.fullDayLength);//하루에 한 번 리젠
     }
     void Respwon()
     {
