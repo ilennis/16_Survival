@@ -6,13 +6,12 @@ using Random = UnityEngine.Random;
 
 public class Regenerate : MonoBehaviour
 {
-
-
     [Header("RegenerateArea")]
     [SerializeField] private List<Bounds> regenerateAreaA;
     [SerializeField] private List<Bounds> regenerateAreaB;
-    [SerializeField] private List<Bounds> regenerateAreaC;
+    [SerializeField] private List<Bounds> regenerateAreaC;//위의 List를 다시 List에 넣을 수 있을까?
     [SerializeField] private List<GameObject> regeneratePrefab;
+    [SerializeField] private float _regenerateStartTime;
 
     public int resourceMaxAmountA;
     public int resourceMaxAmountB;
@@ -24,7 +23,7 @@ public class Regenerate : MonoBehaviour
 
     private void Start()
     {
-        Respwon();
+        InvokeRepeating("Respwon", _regenerateStartTime, RegenerateManager.Instance.RegenerateAttribute.dayCycle.fullDayLength);//하루에 한 번 리젠
     }
     void Respwon()
     {
@@ -40,7 +39,11 @@ public class Regenerate : MonoBehaviour
 
             Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
 
-            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
+            ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
+
+            regenObject.regenerate = this;
+            regenObject.areaCode = 1001;
             //Debug.Log($"생성 성공!{randomPosition}");
         }
         for (; resourceAmountB < resourceMaxAmountB; resourceAmountB++)
@@ -50,7 +53,11 @@ public class Regenerate : MonoBehaviour
 
             Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
 
-            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
+            ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
+
+            regenObject.regenerate = this;
+            regenObject.areaCode = 1002;
             //Debug.Log($"생성 성공!{randomPosition}");
         }
         for (; resourceAmountC < resourceMaxAmountC; resourceAmountC++)
@@ -60,7 +67,11 @@ public class Regenerate : MonoBehaviour
 
             Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
 
-            Instantiate(randomPrefab, randomPosition, Quaternion.identity);
+            GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
+            ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
+
+            regenObject.regenerate = this;
+            regenObject.areaCode = 1003;
             //Debug.Log($"생성 성공!{randomPosition}");
         }
     }
