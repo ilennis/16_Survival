@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3817858423529842748}
     m_Modifications:
+    - target: {fileID: -4870726666704521700, guid: 4a9e365793edb9141a158ba5ce14f83f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1521815488188378, guid: 4a9e365793edb9141a158ba5ce14f83f, type: 3}
       propertyPath: m_Name
       value: Baseball Bat 01
@@ -118,6 +122,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5195178009043849282, guid: b7ce7157e81c9334495026cf0201185f, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 7a6df366180493846a2a9a1d4616f7dd, type: 2}
     - target: {fileID: 5535407753556331538, guid: b7ce7157e81c9334495026cf0201185f, type: 3}
       propertyPath: Data
       value: 
