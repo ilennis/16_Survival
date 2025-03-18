@@ -37,7 +37,7 @@ public class Regenerate : MonoBehaviour
             GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
             Bounds randomArea = regenerateAreaA[Random.Range(0, regenerateAreaA.Count)];
 
-            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), randomArea.center.y, Random.Range(randomArea.min.z, randomArea.max.z));
 
             GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
             ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
@@ -51,7 +51,7 @@ public class Regenerate : MonoBehaviour
             GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
             Bounds randomArea = regenerateAreaB[Random.Range(0, regenerateAreaB.Count)];
 
-            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), randomArea.center.y, Random.Range(randomArea.min.z, randomArea.max.z));
 
             GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
             ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
@@ -65,7 +65,7 @@ public class Regenerate : MonoBehaviour
             GameObject randomPrefab = regeneratePrefab[Random.Range(0, regeneratePrefab.Count)];
             Bounds randomArea = regenerateAreaC[Random.Range(0, regenerateAreaC.Count)];
 
-            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), 0, Random.Range(randomArea.min.z, randomArea.max.z));
+            Vector3 randomPosition = new Vector3(Random.Range(randomArea.min.x, randomArea.max.x), randomArea.center.y, Random.Range(randomArea.min.z, randomArea.max.z));
 
             GameObject RegenObject = Instantiate(randomPrefab, randomPosition, Quaternion.identity);//프리팹 인스턴스 생성
             ObjectAmount regenObject = RegenObject.AddComponent<ObjectAmount>();//인스턴스에 스크립트 추가
