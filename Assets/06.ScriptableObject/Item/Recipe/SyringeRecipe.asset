@@ -15,7 +15,7 @@ MonoBehaviour:
   CraftItem: {fileID: 11400000, guid: 1b740b6bf72ecf24e92472ae3c55fb8c, type: 2}
   Materials:
   - Item: {fileID: 11400000, guid: a8596940954d61e46a7445918b65e7ce, type: 2}
-    Amount: 10
+    Amount: 20
   UnlockCondition:
     ConditionType: 0
     Vaule: 1

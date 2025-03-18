@@ -29,10 +29,6 @@ public class TreeDate : MonoBehaviour, IInteractable, IDamageable
     {
         //무기를 장착하고 있지않으면 표시하지않기
         if (GameManager.Instance.Player.WeaponController.CurrentWeapon == null) return string.Empty;
-        if(!IsCanCollect)
-        {
-            return "인벤토리가 꽉찼습니다";
-        }
         if (!isCanGathering)
         {
             return "더이상 채집이 불가합니다";
@@ -50,13 +46,14 @@ public class TreeDate : MonoBehaviour, IInteractable, IDamageable
     public void Damage(float damage)
     {
         if (!isCanGathering) return;
-        if (!IsCanCollect) return;
-
+        if(!IsCanCollect)
+        {
+            NotificationManager.Instance.ShowFullInventory();
+            return;
+        } 
         var addAmount = treeYield * (int)damage;
         treeHp -= addAmount;
         inventory.AddItem(resourceData, addAmount);
-        Debug.Log($"인벤토리에{resourceData.ItemName}을 {addAmount}만큼 추가하였습니다!");
-
         if (treeHp <= 0) //더이상 채집 불가능하면
         {
             StartCoroutine(ICooldownGathering()); //채집 쿨다운

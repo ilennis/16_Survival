@@ -155,10 +155,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnCollectInput(InputAction.CallbackContext context)
     {
+        if (interaction.Checkedtem == null) return;
         if (context.phase == InputActionPhase.Started)
         {
             interaction.Checkedtem.Collect();
-            Debug.Log("채집");
         }
     }
 

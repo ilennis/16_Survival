@@ -13,16 +13,16 @@ public class Pill : MonoBehaviour,IInteractable
 
     public string GetInfo()
     {
-        if (!IsCanCollect)
-        {
-            return "인벤토리가 꽉찼습니다";
-        }
         return "F키를 눌러서 채집";
     }
 
     public void Collect()
     {
-        if (!IsCanCollect) return;
+        if (!IsCanCollect)
+        {
+            NotificationManager.Instance.ShowFullInventory();
+            return;
+        }
         inventory.AddItem(pillData,1);
         Destroy(gameObject);
     }

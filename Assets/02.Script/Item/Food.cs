@@ -13,7 +13,11 @@ public class Food : MonoBehaviour, IInteractable
 
     public void Collect()
     {
-        if (!inventory.GetCanAddItemSlot(foodData)) return;
+        if (!IsCanCollect)
+        {
+            NotificationManager.Instance.ShowFullInventory();
+            return;
+        }
         inventory.AddItem(foodData, 1);
         Debug.Log($"인벤토리에{foodData.ItemName}을 추가하였습니다!");
         Destroy(gameObject); //오브젝트 파괴
@@ -21,10 +25,6 @@ public class Food : MonoBehaviour, IInteractable
 
     public string GetInfo()
     {
-        if (!IsCanCollect)
-        {
-            return "인벤토리가 꽉찼습니다";
-        }
         return "F를 눌러 채집";
     }
 }

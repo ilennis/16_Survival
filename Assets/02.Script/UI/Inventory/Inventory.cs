@@ -37,18 +37,16 @@ public class Inventory : MonoBehaviour
     //아이템 소지여부를 반환
     public bool IsHasItem(ItemType type) => haveItemCountList.ContainsKey(type);
     //아이템 소지수를 반환
-    public int GetHasItemAmount(ItemType type) => IsHasItem(type) ? haveItemCountList[type] : 0;  
+    public int GetHasItemAmount(ItemType type) => IsHasItem(type) ? haveItemCountList[type] : 0;
     //아이템을 인벤토리에 추가
-    public void AddItem(ItemData itemData, int amount)
+    public void AddItem(ItemData itemData, int amount, bool isShow=true)
     {
         int remainingAmount = amount;
-
         while (remainingAmount > 0)
         {
             var slot = GetCanAddItemSlot(itemData); //추가 가능한 슬롯 가져오기
             if (slot == null)
             {
-                Debug.LogWarning("인벤토리가 꽉 찼습니다!");
                 return;
             }
             int addAmount = CalculateAddAmount(slot, itemData, remainingAmount); // 추가 가능한 아이템수 계산
@@ -58,6 +56,8 @@ public class Inventory : MonoBehaviour
         }
         UpdateHaveItemCountList(itemData, amount); //가지고 있는 아이템수 리스트 업데이트
         OnUpdateInventory(itemData.ItemType);
+        if (!isShow) return;
+        NotificationManager.Instance.ShowAddItem(itemData.ItemName, amount); //획득 알림
     }
     //추가할 아이템 개수 계산
     private int CalculateAddAmount(InventorySlot slot, ItemData itemData, int remainingAmount)
