@@ -21,6 +21,7 @@ public class CheatInventory : MonoBehaviour
         cheatButtons[4].onClick.AddListener(AddFish);
         cheatButtons[5].onClick.AddListener(AddBat);
         cheatButtons[6].onClick.AddListener(AddKnife);
+        cheatButtons[7].onClick.AddListener(AddWater);
     }
 
     private void AddAxe()
@@ -56,5 +57,10 @@ public class CheatInventory : MonoBehaviour
     private void UseRock()
     {
         inventory.UseItem(itemDatas[2], UseRockCount);
+    }
+
+    private void AddWater()
+    {
+        inventory.AddItem(itemDatas[6], 1);
     }
 }

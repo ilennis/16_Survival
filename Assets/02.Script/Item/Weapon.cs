@@ -4,10 +4,12 @@ public class Weapon : MonoBehaviour
 {
     public WeaponData Data;
     private Camera weaponCamera;
+    private Animator animator;
 
     private void Start()
     {
         weaponCamera = Camera.main;
+        animator = GetComponent<Animator>();
     }
 
     public void OnHit()
@@ -38,5 +40,10 @@ public class Weapon : MonoBehaviour
             return Data.ResourceDamage;
         }
         return 0;
+    }
+
+    public void PlayAttackAnimation()
+    {
+        animator.SetTrigger("Attack");
     }
 }
