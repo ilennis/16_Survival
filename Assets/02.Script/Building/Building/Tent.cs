@@ -8,6 +8,8 @@ public class Tent : Building
     public float healAmount = 10f;
     private float healInterval = 3f;
     private float nextHealTime = 0f;
+
+    private PlayerCondition condition;
     private void FixedUpdate()
     {
         if(Time.deltaTime >= nextHealTime)
@@ -24,8 +26,9 @@ public class Tent : Building
         {
             if (player.CompareTag("Player"))
             {
+                condition = player.GetComponent<PlayerCondition>();
+                condition.Heal(healAmount);
                 Debug.Log("체력 회복: " + healAmount);
-                
             }
         }
     }
