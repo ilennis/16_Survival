@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +14,8 @@ public class Inventory : MonoBehaviour
     private InventorySlot[] inventorySlotList;
     private Dictionary<ItemType, int> haveItemCountList = new();
     private Dictionary<ItemType, List<InventorySlot>> notEmptySlotList = new();
+
+    public Action<ItemType> OnUpdateInventory = delegate { };
 
     private void Awake()
     {
@@ -46,6 +49,7 @@ public class Inventory : MonoBehaviour
             remainingAmount -= addAmount;
         }
         UpdateHaveItemCountList(itemData, amount); //가지고 있는 아이템수 리스트 업데이트
+        OnUpdateInventory(itemData.ItemType);
     }
     //추가할 아이템 개수 계산
     private int CalculateAddAmount(InventorySlot slot, ItemData itemData, int remainingAmount)
@@ -90,9 +94,6 @@ public class Inventory : MonoBehaviour
 
         switch (itemData.ItemType)
         {
-            case ItemType.Resource:
-                ConsumeItem(itemData, useAmount);
-                break;
             case ItemType.Food:
                 // 아이템 사용 로직
                 if (itemData is FoodData food)
@@ -100,6 +101,9 @@ public class Inventory : MonoBehaviour
                     food.Eat(player);
                     ConsumeItem(itemData, useAmount);
                 }
+                break;
+            default:
+                ConsumeItem(itemData, useAmount);
                 break;
         }
     }

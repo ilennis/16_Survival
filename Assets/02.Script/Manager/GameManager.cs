@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     public Inventory Inventory { get; set; }
 
+    public bool IsClear  { get; set; }
+
     private void Awake()
     {
         if (instance == null)
