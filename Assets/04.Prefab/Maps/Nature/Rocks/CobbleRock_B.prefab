@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 2713339535168253549}
   - component: {fileID: 4861728764946463497}
   - component: {fileID: 3935704528811506587}
+  - component: {fileID: -7757082051132903707}
   m_Layer: 0
   m_Name: CobbleRock_B
   m_TagString: Untagged
@@ -331,7 +332,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -355,8 +356,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.022522, y: 0.826458, z: 1}
+  m_Center: {x: -0.11123657, y: 0.4633789, z: 0}
 --- !u!114 &3935704528811506587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,3 +372,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceData: {fileID: 0}
   NodeData: {fileID: 11400000, guid: d5f871ce07c5fd045b26e18deb6251d4, type: 2}
+--- !u!54 &-7757082051132903707
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 156448}
+  serializedVersion: 4
+  m_Mass: 20
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
