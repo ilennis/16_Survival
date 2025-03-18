@@ -18,6 +18,7 @@ public class MaterialIcon : MonoBehaviour
             materialAmountText.gameObject.SetActive(false);
             return;
         }
+        materialAmountText.gameObject.SetActive(true);
         UpdateAmount(); //아이템 소지수 / 필요한 아이템수 텍스트 업데이트
     }
 

@@ -17,6 +17,7 @@ public class UICrafting : MonoBehaviour
     private void OnEnable()
     {
         SetData(); //데이터 셋팅
+        recipeList.verticalNormalizedPosition = 1;
     }
 
     private void CreateCell()
