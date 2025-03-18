@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     private Transform targetPlayer;       // 플레이어의 위치
 
     public float detectionRange = 10f;    // 플레이어를 감지할 거리
-    private float attackDistance = 1.6f;  // 공격 거리 (플레이어와의 거리)
+    private float attackDistance = 2f;  // 공격 거리 (플레이어와의 거리)
     private float stopDistance = 2f;      // 공격 전 멈추는 거리 (attackDistance보다 약간 크게 설정)
     private float walkSpeed = 2f;         // 걷는 속도
     private float runSpeed = 5f;          // 달리는 속도
