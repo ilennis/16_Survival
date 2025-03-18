@@ -172,6 +172,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
+        if (!isCanMove) return;
         if (context.phase == InputActionPhase.Started)
         {
             weaponController.Attack();
