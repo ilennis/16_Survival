@@ -5,6 +5,7 @@ public class Player : MonoBehaviour
     public PlayerController controller;
     public PlayerCondition Condition;
     public WeaponController WeaponController;
+    public Interaction Interaction;
 
     private void Awake()
     {
@@ -14,6 +15,7 @@ public class Player : MonoBehaviour
         controller = GetComponent<PlayerController>();
         Condition = GetComponent<PlayerCondition>();
         WeaponController = GetComponent<WeaponController>();
+        Interaction = GetComponent<Interaction>();
     }
 
     public void Eat(FoodEffect foodEffect)

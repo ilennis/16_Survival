@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6060623002938030876}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: DUMMY_item_pack_can_closed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5011600581759770397}
   - component: {fileID: 2879433512814432194}
   - component: {fileID: 510328284219415647}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 466f8885f72840f4fa7dc1151f8fd0ef, type: 3}
-  m_Name: Stone
+  m_Name: Pill
   m_EditorClassIdentifier: 
-  ItemName: "\uB3CC"
-  Description: "\uBB34\uAE30,\uAC74\uCD95\uC5D0 \uC4F0\uC785\uB2C8\uB2E4."
-  Icon: {fileID: 21300000, guid: 583675a75bcb2a941ac555b9ccd513a9, type: 3}
-  ItemType: 2
-  CellMaxHaveCount: 5
+  ItemName: "\uC57D"
+  Description: "\uBC31\uC2E0\uC744 \uB9CC\uB4E4\uC218\uC788\uC2B5\uB2C8\uB2E4."
+  Icon: {fileID: 21300000, guid: cc1d47cf07758074986de39fa1d4ad70, type: 3}
+  ItemType: 5
+  CellMaxHaveCount: 3
   ItemPrefab: {fileID: 0}

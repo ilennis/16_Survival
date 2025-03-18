@@ -2,7 +2,12 @@ public enum ItemType
 {
     Equip,       //무기
     Food,        //음식
-    Resource //자원
+    Wood,      //나무
+    Iron,         // 철
+    Rock,        //돌
+    Pill,           //약
+    Syringe,   //주사기
+    Vaccine    //백신
 }
 public enum FoodEffectType
 {
