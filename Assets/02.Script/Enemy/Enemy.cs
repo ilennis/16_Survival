@@ -274,7 +274,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
-        animator.SetTrigger("Die");
+        //animator.SetTrigger("Die");
         navMeshAgent.isStopped = true;
 
         // 아이템 드롭
