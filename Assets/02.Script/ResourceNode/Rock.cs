@@ -10,6 +10,8 @@ public class Rock : MonoBehaviour, IInteractable
     private int rockHp;
     private int rockYield;
 
+    public bool IsCanCollect => inventory.GetCanAddItemSlot(resourceData);
+
     private void Start()
     {
         rockHp = NodeData.Hp;
@@ -20,13 +22,16 @@ public class Rock : MonoBehaviour, IInteractable
 
     public string GetInfo()
     {
-        //TODO : 인벤토리에 아이템을 최대소지수 만큼 가지고 있으면 더이상 채집 못한다고 표시
+        if (!IsCanCollect)
+        {
+            return "인벤토리가 꽉찼습니다";
+        }
         return $" F키를 눌러 채집";
     }
 
     public void Collect()
     {
-        if (!inventory.GetCanAddItemSlot(resourceData)) return;
+        if (!IsCanCollect) return;
         
         rockHp -= rockYield;
         inventory.AddItem(resourceData, rockYield);

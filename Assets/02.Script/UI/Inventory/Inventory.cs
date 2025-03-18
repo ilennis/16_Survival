@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,13 +18,20 @@ public class Inventory : MonoBehaviour
 
     public Action<ItemType> OnUpdateInventory = delegate { };
 
+    private GameManager gameManager;
+
     private void Awake()
     {
-        GameManager.Instance.Inventory = this;
-        player = GameManager.Instance.Player;
+        gameManager = GameManager.Instance;
+        gameManager.Inventory = this;
         dataManager = DataManager.Instance;
         inventorySlotList = inventoryList.GetComponentsInChildren<InventorySlot>();
         haveItemCountList = dataManager.HaveItemCountList;
+    }
+
+    private void Start()
+    {
+        player = gameManager.Player;
     }
 
     //아이템 소지여부를 반환

@@ -3,8 +3,8 @@ using UnityEngine;
 public class Food : MonoBehaviour, IInteractable
 {
     [SerializeField] FoodData foodData;
-
     private Inventory inventory;
+    public bool IsCanCollect => inventory.GetCanAddItemSlot(foodData);
 
     private void Start()
     {
@@ -15,12 +15,16 @@ public class Food : MonoBehaviour, IInteractable
     {
         if (!inventory.GetCanAddItemSlot(foodData)) return;
         inventory.AddItem(foodData, 1);
-        Debug.Log($"인벤토리에{foodData.ItemName}을 인벤토리에 추가하였습니다!");
+        Debug.Log($"인벤토리에{foodData.ItemName}을 추가하였습니다!");
         Destroy(gameObject); //오브젝트 파괴
     }
 
     public string GetInfo()
     {
+        if (!IsCanCollect)
+        {
+            return "인벤토리가 꽉찼습니다";
+        }
         return "F를 눌러 채집";
     }
 }
