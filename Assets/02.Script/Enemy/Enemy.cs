@@ -43,7 +43,8 @@ public class Enemy : MonoBehaviour
     public float experiencePoints = 50f;   // 적이 주는 경험치
     public float attackSpeed = 1f;         // 공격 속도 (초 단위)
 
-    public GameObject itemDropPrefab;      // 죽을 때 떨어뜨릴 아이템 프리팹
+    public ItemData DropItemData;      // 죽을 때 획득할 아이템 데이터
+    public int DropItemAmount;      // 획득할 아이템 개수
 
     void Start()
     {
@@ -278,9 +279,10 @@ public class Enemy : MonoBehaviour
         navMeshAgent.isStopped = true;
 
         // 아이템 드롭
-        if (itemDropPrefab != null)
+        if (DropItemData != null)
         {
-            Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
+            // 아이템 획득
+            GameManager.Instance.Inventory.AddItem(DropItemData, DropItemAmount);
         }
 
         // 적 오브젝트 제거
