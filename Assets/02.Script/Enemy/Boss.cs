@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour,IDamageable
 {
     private NavMeshAgent navMeshAgent;    // NavMeshAgent
     private Animator animator;            // Animator
@@ -43,6 +43,8 @@ public class Boss : MonoBehaviour
 
     public ItemData DropItemData;      // 죽을 때 획득할 아이템 데이터
     public int DropItemAmount;      // 획득할 아이템 개수
+
+    public DamageType DamageType => DamageType.Enemy;
 
     void Start()
     {
@@ -228,18 +230,6 @@ public class Boss : MonoBehaviour
         }
     }
 
-    // 체력, 공격력, 경험치 등
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            currentState = State.Die;
-            Die();
-        }
-    }
-
     private void Die()
     {
         animator.SetTrigger("Die");
@@ -254,4 +244,13 @@ public class Boss : MonoBehaviour
         Destroy(gameObject, 2f); // 2초 후에 오브젝트 제거
     }
 
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            currentState = State.Die;
+            Die();
+        }
+    }
 }

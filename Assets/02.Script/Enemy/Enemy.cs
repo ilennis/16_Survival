@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IDamageable
 {
     private NavMeshAgent navMeshAgent;    // NavMeshAgent
     private Animator animator;            // Animator
@@ -43,7 +43,10 @@ public class Enemy : MonoBehaviour
     public float experiencePoints = 50f;   // 적이 주는 경험치
     public float attackSpeed = 1f;         // 공격 속도 (초 단위)
 
-    public GameObject itemDropPrefab;      // 죽을 때 떨어뜨릴 아이템 프리팹
+    public ItemData DropItemData;      // 죽을 때 획득하는 아이템 데이터
+    public int DropItemAmount;      // 죽을 때 획득하는 아이템 개수
+
+    public DamageType DamageType => DamageType.Enemy;
 
     void Start()
     {
@@ -94,11 +97,6 @@ public class Enemy : MonoBehaviour
     {
         if (targetPlayer == null || navMeshAgent == null)
             return;
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            TakeDamage(health); // 체력을 즉시 0으로 만들기
-        }
 
         // 플레이어와의 거리 계산
         float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
@@ -275,10 +273,10 @@ public class Enemy : MonoBehaviour
         animator.SetTrigger("Die");
         navMeshAgent.isStopped = true;
 
-        // 아이템 드롭
-        if (itemDropPrefab != null)
+        // 아이템 획득
+        if (DropItemData != null)
         {
-            Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
+            GameManager.Instance.Inventory.AddItem(DropItemData,DropItemAmount);
         }
 
         // 경험치 지급
@@ -292,18 +290,6 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject, 1f); // 2초 후에 오브젝트 제거
     }
 
-    // 데미지를 받는 함수
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            currentState = State.Die;
-            Die();
-        }
-    }
-
     private void SetRandomPatrolPosition()
     {
         Vector3 randomDirection = Random.insideUnitSphere * 10f;
@@ -311,5 +297,16 @@ public class Enemy : MonoBehaviour
         NavMeshHit hit;
         NavMesh.SamplePosition(randomDirection, out hit, 10f, NavMesh.AllAreas);
         randomPatrolPosition = hit.position;
+    }
+
+    // 데미지를 받는 함수
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            currentState = State.Die;
+            Die();
+        }
     }
 }

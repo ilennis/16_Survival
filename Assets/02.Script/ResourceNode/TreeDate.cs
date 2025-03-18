@@ -9,6 +9,8 @@ public class TreeDate : MonoBehaviour, IInteractable, IDamageable
     
     public DamageType DamageType => DamageType.Resource;
 
+    public bool IsCanCollect => inventory.GetCanAddItemSlot(resourceData);
+
     private int treeHp;
     private int treeYield;
 
@@ -25,7 +27,16 @@ public class TreeDate : MonoBehaviour, IInteractable, IDamageable
 
     public string GetInfo()
     {
-        //TODO : 인벤토리에 아이템을 최대소지수 만큼 가지고 있으면 더이상 채집 못한다고 표시
+        //무기를 장착하고 있지않으면 표시하지않기
+        if (GameManager.Instance.Player.WeaponController.CurrentWeapon == null) return string.Empty;
+        if(!IsCanCollect)
+        {
+            return "인벤토리가 꽉찼습니다";
+        }
+        if (!isCanGathering)
+        {
+            return "더이상 채집이 불가합니다";
+        }
         return $"마우스 왼쪽버튼을 눌러 나무베기";
     }
 
@@ -39,12 +50,12 @@ public class TreeDate : MonoBehaviour, IInteractable, IDamageable
     public void Damage(float damage)
     {
         if (!isCanGathering) return;
-        if (!inventory.GetCanAddItemSlot(resourceData)) return;
+        if (!IsCanCollect) return;
 
         var addAmount = treeYield * (int)damage;
         treeHp -= addAmount;
         inventory.AddItem(resourceData, addAmount);
-        Debug.Log($"인벤토리에{resourceData.ItemName}을 인벤토리에 추가하였습니다!");
+        Debug.Log($"인벤토리에{resourceData.ItemName}을 {addAmount}만큼 추가하였습니다!");
 
         if (treeHp <= 0) //더이상 채집 불가능하면
         {

@@ -7,6 +7,8 @@ public class Water : MonoBehaviour,IInteractable
 
     private Inventory inventory;
 
+    public bool IsCanCollect => inventory.GetCanAddItemSlot(waterData);
+
     private void Start()
     {
         inventory = GameManager.Instance.Inventory;
@@ -14,13 +16,16 @@ public class Water : MonoBehaviour,IInteractable
 
     public string GetInfo()
     {
-        //TODO : 인벤토리에 아이템을 최대소지수 만큼 가지고 있으면 더이상 채집 못한다고 표시
+        if (!IsCanCollect)
+        {
+            return "인벤토리가 꽉찼습니다";
+        }
         return $"F키를 눌러서 물 뜨기";
     }
 
     public void Collect()
     {
-        if (!inventory.GetCanAddItemSlot(waterData)) return;
+        if (!IsCanCollect) return;
         inventory.AddItem(waterData,1);
     }
 }

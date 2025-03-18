@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74bc6b59a7292f44eab75b1bce6b1434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceData: {fileID: 0}
+  resourceData: {fileID: 11400000, guid: 977a20d5b9405164eb21bc321e6a8f8e, type: 2}
   NodeData: {fileID: 11400000, guid: 1cb71ca218cee4c479827e7d0cd65f86, type: 2}
   GatheringCooldown: 180
 --- !u!1001 &914487740506733144
