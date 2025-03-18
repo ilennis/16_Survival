@@ -32,12 +32,14 @@ public class Boss : MonoBehaviour
     public State currentState;            // 현재 상태
 
     private Coroutine attackCoroutine;     // 공격 반복을 위한 Coroutine
+    private Coroutine specialAttackCoroutine;  // 특수 공격 반복을 위한 Coroutine
 
     // 체력, 공격력, 경험치
     public float health = 100f;            // 보스의 체력
     public float attackPower = 10f;        // 보스의 공격력
     public float experiencePoints = 100f;  // 보스가 주는 경험치
     public float attackSpeed = 1f;         // 공격 속도 (초 단위)
+    public float specialAttackCooldown = 4f; // 특수 공격 쿨다운 시간
 
     public GameObject itemDropPrefab;      // 죽을 때 떨어뜨릴 아이템 프리팹
 
@@ -77,16 +79,51 @@ public class Boss : MonoBehaviour
         // 플레이어와의 거리 계산
         float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
 
-        if (distanceToPlayer <= detectionRange && currentState != State.Attack && currentState != State.SpecialAttack)
+        // 감지 범위 내에서 플레이어를 추적
+        if (distanceToPlayer <= detectionRange)
         {
             // 플레이어가 감지 범위 안에 있으면 Run 상태로 전환
-            if (currentState != State.Run)
+            if (currentState != State.Run && currentState != State.Attack && currentState != State.SpecialAttack)
             {
                 currentState = State.Run;
                 animator.SetBool("isRunning", true);
                 animator.SetBool("isIdle", false);
+                animator.ResetTrigger("Attack"); // Attack 애니메이션 리셋
             }
+
             navMeshAgent.SetDestination(targetPlayer.position);  // 플레이어를 향해 이동
+
+            // 일정 거리 이하로 가까워지면 Attack 상태로 전환
+            if (distanceToPlayer <= stopDistance)
+            {
+                if (currentState != State.Attack && currentState != State.SpecialAttack)
+                {
+                    currentState = State.Attack;
+                    navMeshAgent.isStopped = true;
+                    animator.SetBool("isRunning", false);
+                    animator.SetBool("isIdle", false);
+
+                    if (attackCoroutine == null)
+                        attackCoroutine = StartCoroutine(AttackRepeat());
+                }
+            }
+            else if (distanceToPlayer > stopDistance)
+            {
+                // 플레이어와의 거리가 stopDistance보다 멀어지면 Run 상태로 전환
+                if (currentState == State.Attack || currentState == State.SpecialAttack)
+                {
+                    currentState = State.Run;
+                    navMeshAgent.isStopped = false;
+                    animator.SetBool("isRunning", true);
+                    animator.SetBool("isIdle", false);
+
+                    if (attackCoroutine != null)
+                    {
+                        StopCoroutine(attackCoroutine);
+                        attackCoroutine = null;
+                    }
+                }
+            }
         }
         else if (distanceToPlayer > detectionRange)
         {
@@ -96,30 +133,12 @@ public class Boss : MonoBehaviour
             animator.SetBool("isRunning", false);
         }
 
-        // Run 상태에서 플레이어와의 거리가 stopDistance 이내로 가까워지면 Attack 상태로 전환
-        if (currentState == State.Run && distanceToPlayer <= stopDistance)
+        // 특수 공격을 일정 시간마다 실행
+        if (currentState != State.SpecialAttack && !isSpecialAttackReady && distanceToPlayer <= attackDistance)
         {
-            currentState = State.Attack;
-            navMeshAgent.isStopped = true;
-            animator.SetBool("isRunning", false);
-            animator.SetBool("isIdle", false);
-
-            if (attackCoroutine == null)
-                attackCoroutine = StartCoroutine(AttackRepeat());
-        }
-
-        // Attack 상태에서 플레이어가 멀어지면 Run 상태로 전환
-        if (currentState == State.Attack && distanceToPlayer > stopDistance)
-        {
-            currentState = State.Run;
-            navMeshAgent.isStopped = false;
-            animator.SetBool("isRunning", true);
-            animator.SetBool("isIdle", false);
-
-            if (attackCoroutine != null)
+            if (specialAttackCoroutine == null)
             {
-                StopCoroutine(attackCoroutine);
-                attackCoroutine = null;
+                specialAttackCoroutine = StartCoroutine(SpecialAttackCooldown());
             }
         }
     }
@@ -158,7 +177,7 @@ public class Boss : MonoBehaviour
                     Player player = targetPlayer.GetComponent<Player>();
                     if (player != null)
                     {
-                      //  player.TakeDamage(attackPower); // 일반 공격으로 데미지 입힘
+                        // player.TakeDamage(attackPower); // 일반 공격으로 데미지 입힘
                         normalAttackCount++;
                     }
                 }
@@ -178,26 +197,35 @@ public class Boss : MonoBehaviour
         }
     }
 
-    // 특수 공격
-    private void SpecialAttack()
+    private IEnumerator SpecialAttackCooldown()
     {
-        if (targetPlayer != null)
+        yield return new WaitForSeconds(specialAttackCooldown);
+
+        if (currentState != State.SpecialAttack)
         {
-            float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
-            if (distanceToPlayer <= attackDistance)
+            currentState = State.SpecialAttack;
+            animator.SetTrigger("SpecialAttack");
+
+            // 특수 공격을 진행 (4초마다 한번)
+            if (targetPlayer != null)
             {
-                Player player = targetPlayer.GetComponent<Player>();
-                if (player != null)
+                float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
+                if (distanceToPlayer <= attackDistance)
                 {
-                    float specialAttackDamage = attackPower * 2; // 특수 공격은 공격력의 두 배
-                  //  player.TakeDamage(specialAttackDamage);
+                    Player player = targetPlayer.GetComponent<Player>();
+                    if (player != null)
+                    {
+                        float specialAttackDamage = attackPower * 2; // 특수 공격은 공격력의 두 배
+                        // player.TakeDamage(specialAttackDamage);
+                    }
                 }
             }
-        }
 
-        // 특수 공격 후 다시 Run 상태로 돌아가도록 설정
-        isSpecialAttackReady = false;
-        currentState = State.Run;
+            // 특수 공격 후 다시 Run 상태로 돌아가도록 설정
+            isSpecialAttackReady = false;
+            specialAttackCoroutine = null;
+            currentState = State.Run;
+        }
     }
 
     // 체력, 공격력, 경험치 등
