@@ -175,11 +175,10 @@ public class Boss : MonoBehaviour
                 float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
                 if (distanceToPlayer <= attackDistance)
                 {
-                    Player player = targetPlayer.GetComponent<Player>();
+                    PlayerCondition player = targetPlayer.GetComponent<PlayerCondition>();
                     if (player != null)
                     {
-                        // player.TakeDamage(attackPower); // 일반 공격으로 데미지 입힘
-                        normalAttackCount++;
+                        player.TakeDamage((int)attackPower); // 플레이어에게 데미지 주기
                     }
                 }
             }
@@ -213,11 +212,11 @@ public class Boss : MonoBehaviour
                 float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
                 if (distanceToPlayer <= attackDistance)
                 {
-                    Player player = targetPlayer.GetComponent<Player>();
+                    PlayerCondition player = targetPlayer.GetComponent<PlayerCondition>();
                     if (player != null)
                     {
                         float specialAttackDamage = attackPower * 2; // 특수 공격은 공격력의 두 배
-                        // player.TakeDamage(specialAttackDamage);
+                        player.TakeDamage((int)attackPower); // 플레이어에게 데미지 주기
                     }
                 }
             }
@@ -254,4 +253,5 @@ public class Boss : MonoBehaviour
         // 적 오브젝트 제거
         Destroy(gameObject, 2f); // 2초 후에 오브젝트 제거
     }
+
 }
