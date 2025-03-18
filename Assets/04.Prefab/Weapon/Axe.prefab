@@ -95,7 +95,6 @@ GameObject:
   - component: {fileID: 7392488169303074946}
   - component: {fileID: 7403158368569928328}
   - component: {fileID: 4983828997601308536}
-  - component: {fileID: 4858126500253153261}
   m_Layer: 0
   m_Name: Fireaxe 01
   m_TagString: Weapon
@@ -184,26 +183,13 @@ MeshCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: e9761215d79323f49a2301e1040de95c, type: 3}
---- !u!114 &4858126500253153261
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7416441668438316248}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70fc9194066db764e8f709219c4cceae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: 9624de8e9bd0cf141b88db09a197c103, type: 2}
 --- !u!1001 &5824934608901631969
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -260,6 +246,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5195178009043849282, guid: b7ce7157e81c9334495026cf0201185f, type: 3}
+      propertyPath: Data
+      value: 
+      objectReference: {fileID: 11400000, guid: 9624de8e9bd0cf141b88db09a197c103, type: 2}
     - target: {fileID: 5535407753556331538, guid: b7ce7157e81c9334495026cf0201185f, type: 3}
       propertyPath: Data
       value: 
