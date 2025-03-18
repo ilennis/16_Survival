@@ -65,7 +65,18 @@ public class CraftingCell : MonoBehaviour
     {
         foreach (var material in CraftingRecipe.Materials)
         {
-            inventory.UseItem(material.Item, material.Amount);  //재료 사용
+            inventory.UseItem(material.Item, material.Amount);  // 재료 사용
+        }
+        //재료를 사용한 후 다시 슬롯 확인 (빈 공간이 확보되었는지 체크)
+        if (!inventory.GetCanAddItemSlot(CraftingRecipe.CraftItem))
+        {
+            NotificationManager.Instance.ShowFullInventory();
+            //이미 사용한 재료 복구
+            foreach (var material in CraftingRecipe.Materials)
+            {
+                inventory.AddItem(material.Item, material.Amount,false);
+            }
+            return;
         }
         inventory.AddItem(CraftingRecipe.CraftItem, 1);  //인벤토리에 추가
         //제작이 한번만 가능하면
