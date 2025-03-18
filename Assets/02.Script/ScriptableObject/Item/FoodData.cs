@@ -10,7 +10,7 @@ public class FoodData : ItemData
         foreach(var foodEffect in FoodEffects)
         {
             //음식 효과 적용
-            //player.Eat(foodEffect);
+            player.Eat(foodEffect);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,12 +31,18 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private Rigidbody rb;
     private PlayerCondition condition;
+    private Interaction interaction;
+    private WeaponController weaponController;
+
+    private bool isCanMove => !InventoryManager.Instance.IsOpen; // 인벤토리 열리면 이동 불가
 
     private void Awake()
     {
         cam = Camera.main;
         rb = GetComponent<Rigidbody>();
         condition = GetComponent<PlayerCondition>();
+        interaction = GetComponent<Interaction>();
+        weaponController = GetComponent<WeaponController>();
     }
 
     void Start()
@@ -56,11 +63,13 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!isCanMove) return; 
         Move();
     }
 
     private void LateUpdate()
     {
+        if (!isCanMove) return;
         if (canLook)
         {
             CameraLook();
@@ -146,25 +155,27 @@ public class PlayerController : MonoBehaviour
 
     public void OnCollectInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Started)
         {
+            interaction.Checkedtem.Collect();
             Debug.Log("채집");
         }
     }
 
     public void OnInventoryInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("인벤토리");
+            InventoryManager.Instance.ToggleInventory();
         }
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
     {
-        if (context.phase == InputActionPhase.Performed)
+        if (!isCanMove) return;
+        if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("공격");
+            weaponController.Attack();
         }
     }
 

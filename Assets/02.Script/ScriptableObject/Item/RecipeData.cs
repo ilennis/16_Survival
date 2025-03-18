@@ -14,8 +14,7 @@ public class RecipeData : ScriptableObject
         switch (UnlockCondition.ConditionType)
         {
             case ConditionType.PlayerLevel:
-                //TODO:플레이어 레벨 참조
-                return 1 >= UnlockCondition.Vaule;
+                return GameManager.Instance.Player.Condition.level >= UnlockCondition.Vaule;
         }
         return false;
     }

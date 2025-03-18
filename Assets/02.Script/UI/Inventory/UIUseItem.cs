@@ -36,7 +36,7 @@ public class UIUseItem : MonoBehaviour
 
     private void OnClick(ItemData data, PointerEventData eventData)
     {
-        if (data.ItemType != ItemType.Food) return;
+        if (data == null || !IsCanActiveUseUI(data)) return;
         useItem = data;
         useItemWindow.gameObject.SetActive(true);
         itemInfoText.text = $"<color=yellow>{data.ItemName}</color>을(를)\n사용하시겠습니까?";
@@ -46,7 +46,18 @@ public class UIUseItem : MonoBehaviour
     private void UseItem()
     {
         if (useItem == null) return;
-        inventory.UseItem(useItem, 1);
+        switch (useItem.ItemType)
+        {
+            case ItemType.Vaccine:
+                GameManager.Instance.IsClear = true;
+                break;
+            case ItemType.Pill:
+                GameManager.Instance.Player.Condition.Damage(10);
+                break;
+            default:
+                inventory.UseItem(useItem, 1);
+                break;
+        }
         useItemWindow.gameObject.SetActive(false);
     }
 
@@ -55,5 +66,13 @@ public class UIUseItem : MonoBehaviour
     {
         useItem = null;
         useItemWindow.gameObject.SetActive(false);
+    }
+
+    private bool IsCanActiveUseUI(ItemData data)
+    {
+        bool isCanUseVaccine = data.ItemType == ItemType.Vaccine && inventory.IsHasItem(ItemType.Syringe);
+        bool isPill = data.ItemType == ItemType.Pill;
+        bool isFood = data.ItemType == ItemType.Food;
+        return isCanUseVaccine || isPill || isFood ;
     }
 }

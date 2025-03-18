@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 471630}
   - component: {fileID: 3319410}
   - component: {fileID: 2336914}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lo_CobbleRock_A_LOD2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 490386}
   - component: {fileID: 3369606}
   - component: {fileID: 2363742}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lo_CobbleRock_A_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,8 @@ GameObject:
   - component: {fileID: 20547628}
   - component: {fileID: -3726782972026286422}
   - component: {fileID: 8019070743931296558}
-  m_Layer: 0
+  - component: {fileID: 2494891749228490608}
+  m_Layer: 9
   m_Name: CobbleRock_A
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,8 +277,22 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.5587559, z: 1.514801}
+  m_Center: {x: 0, y: 0.7818403, z: 0.04045105}
+--- !u!114 &2494891749228490608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e66a39d5c7ab86a4f8c61eefe4affc70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resourceData: {fileID: 0}
+  NodeData: {fileID: 11400000, guid: d5f871ce07c5fd045b26e18deb6251d4, type: 2}
 --- !u!1 &191966
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,7 +304,7 @@ GameObject:
   - component: {fileID: 441120}
   - component: {fileID: 3381624}
   - component: {fileID: 2369264}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: lo_CobbleRock_A_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}

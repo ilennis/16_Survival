@@ -13,7 +13,7 @@ public class UIItemInfo : MonoBehaviour
     public Action<ItemData, PointerEventData> OnExitEvent = delegate { };
     public Action<ItemData, PointerEventData> OnMoveEvent = delegate { };
 
-    private void Start()
+    private void OnEnable()
     {
         OnEnterEvent += OnPointerEnter;
         OnExitEvent += OnPointerExit;

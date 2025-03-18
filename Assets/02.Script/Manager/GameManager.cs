@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,17 @@ public class GameManager : MonoBehaviour
     public Player Player { get; set; }
 
     public Inventory Inventory { get; set; }
+
+    public bool IsClear
+    {
+        set
+        {
+            if (value)
+            {
+                SceneManager.LoadScene("ClearScene");
+            }
+        }
+    }
 
     private void Awake()
     {

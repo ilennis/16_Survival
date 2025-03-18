@@ -29,14 +29,13 @@ public class Interaction : MonoBehaviour
     private void CheckItem()
     {
         //레이를 쏠 위치 설정
-        Vector3 rayPos = transform.position + Vector3.up * 0.35f;
+        Vector3 rayPos = transform.position;
         //레이의 감지 범위 설정
         float sphereRadius = 2.0f;
         Ray ray = new Ray(rayPos, transform.forward);
         //레이 표시
         Debug.DrawLine(ray.origin, ray.origin + ray.direction * MaxCheckDistance, Color.red);
         //레이 충돌
-        //SphereCast를 이용해 레이 폭을 늘리기
         if (Physics.SphereCast(ray, sphereRadius, out RaycastHit hit, MaxCheckDistance, InteractionLayer))
         {
             if (hit.collider.gameObject != checkObject)

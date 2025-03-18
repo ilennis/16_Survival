@@ -41,7 +41,8 @@ public class Boss : MonoBehaviour
     public float attackSpeed = 1f;         // 공격 속도 (초 단위)
     public float specialAttackCooldown = 4f; // 특수 공격 쿨다운 시간
 
-    public GameObject itemDropPrefab;      // 죽을 때 떨어뜨릴 아이템 프리팹
+    public ItemData DropItemData;      // 죽을 때 획득할 아이템 데이터
+    public int DropItemAmount;      // 획득할 아이템 개수
 
     void Start()
     {
@@ -245,12 +246,11 @@ public class Boss : MonoBehaviour
         animator.SetTrigger("Die");
         navMeshAgent.isStopped = true;
 
-        // 아이템 드롭
-        if (itemDropPrefab != null)
+        if (DropItemData != null)
         {
-            Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
+            // 아이템 획득
+            GameManager.Instance.Inventory.AddItem(DropItemData, DropItemAmount);
         }
-
         // 적 오브젝트 제거
         Destroy(gameObject, 2f); // 2초 후에 오브젝트 제거
     }
