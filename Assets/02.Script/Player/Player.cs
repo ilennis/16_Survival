@@ -3,9 +3,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public PlayerController controller;
-    public PlayerCondition condition;
+    public PlayerCondition Condition;
     public WeaponController WeaponController;
-
 
     private void Awake()
     {
@@ -13,7 +12,20 @@ public class Player : MonoBehaviour
         CharacterManager.Instance.Player = this;
 
         controller = GetComponent<PlayerController>();
-        condition = GetComponent<PlayerCondition>();
+        Condition = GetComponent<PlayerCondition>();
         WeaponController = GetComponent<WeaponController>();
+    }
+
+    public void Eat(FoodEffect foodEffect)
+    {
+        switch (foodEffect.FoodEffectType)
+        {
+            case FoodEffectType.HungerRecovery:
+                Condition.Eat(foodEffect.Amount);
+                break;
+            case FoodEffectType.ThirstRecovery:
+                Condition.Drink(foodEffect.Amount);
+                break;
+        }
     }
 }
