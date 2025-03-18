@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2368724}
   - component: {fileID: 11489712}
   - component: {fileID: 1960283179506840404}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WaterPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4466901477931416}
   - component: {fileID: 215663709744633162}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Reflection Probe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
