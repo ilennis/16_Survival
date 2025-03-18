@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isCanMove) return; 
+        if (!isCanMove) return;
         Move();
     }
 
@@ -155,10 +155,16 @@ public class PlayerController : MonoBehaviour
 
     public void OnCollectInput(InputAction.CallbackContext context)
     {
-        if (interaction.Checkedtem == null) return;
         if (context.phase == InputActionPhase.Started)
         {
-            interaction.Checkedtem.Collect();
+            if (interaction.CheckedItem != null)
+            {
+                interaction.CheckedItem.Collect();
+            }
+            else if (interaction.CheckedWater != null)
+            {
+                interaction.CheckedWater.Collect();
+            }
         }
     }
 
