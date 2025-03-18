@@ -270,7 +270,7 @@ public class Enemy : MonoBehaviour,IDamageable
 
     private void Die()
     {
-        animator.SetTrigger("Die");
+        //animator.SetTrigger("Die");
         navMeshAgent.isStopped = true;
 
         // 아이템 획득

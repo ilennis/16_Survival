@@ -78,8 +78,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 4, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.9484253, z: 1}
+  m_Center: {x: 0, y: 1.0257874, z: 0}
 --- !u!54 &5375067680016906660
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 7.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -169,8 +169,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 0.2
-  MaxDistance: 0.8
+  MinDistance: 0.6224365
+  MaxDistance: 1.5785522
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
