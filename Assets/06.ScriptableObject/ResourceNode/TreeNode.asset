@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9f763465a0678b4eb79adacde8a5423, type: 3}
   m_Name: TreeNode
   m_EditorClassIdentifier: 
-  Hp: 0
-  Yield: 0
+  Hp: 10
+  Yield: 1

@@ -147,7 +147,8 @@ MonoBehaviour:
   attackPower: 10
   experiencePoints: 50
   attackSpeed: 1
-  itemDropPrefab: {fileID: 0}
+  DropItemData: {fileID: 11400000, guid: a8596940954d61e46a7445918b65e7ce, type: 2}
+  DropItemAmount: 3
 --- !u!82 &6057507497384375202
 AudioSource:
   m_ObjectHideFlags: 0

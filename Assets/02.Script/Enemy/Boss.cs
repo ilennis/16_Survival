@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class Boss : MonoBehaviour
+public class Boss : MonoBehaviour,IDamageable
 {
     private NavMeshAgent navMeshAgent;    // NavMeshAgent
     private Animator animator;            // Animator
@@ -41,7 +41,10 @@ public class Boss : MonoBehaviour
     public float attackSpeed = 1f;         // 공격 속도 (초 단위)
     public float specialAttackCooldown = 4f; // 특수 공격 쿨다운 시간
 
-    public GameObject itemDropPrefab;      // 죽을 때 떨어뜨릴 아이템 프리팹
+    public ItemData DropItemData;      // 죽을 때 획득할 아이템 데이터
+    public int DropItemAmount;      // 획득할 아이템 개수
+
+    public DamageType DamageType => DamageType.Enemy;
 
     void Start()
     {
@@ -174,11 +177,10 @@ public class Boss : MonoBehaviour
                 float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
                 if (distanceToPlayer <= attackDistance)
                 {
-                    Player player = targetPlayer.GetComponent<Player>();
+                    PlayerCondition player = targetPlayer.GetComponent<PlayerCondition>();
                     if (player != null)
                     {
-                        // player.TakeDamage(attackPower); // 일반 공격으로 데미지 입힘
-                        normalAttackCount++;
+                        player.TakeDamage((int)attackPower); // 플레이어에게 데미지 주기
                     }
                 }
             }
@@ -212,11 +214,11 @@ public class Boss : MonoBehaviour
                 float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
                 if (distanceToPlayer <= attackDistance)
                 {
-                    Player player = targetPlayer.GetComponent<Player>();
+                    PlayerCondition player = targetPlayer.GetComponent<PlayerCondition>();
                     if (player != null)
                     {
                         float specialAttackDamage = attackPower * 2; // 특수 공격은 공격력의 두 배
-                        // player.TakeDamage(specialAttackDamage);
+                        player.TakeDamage((int)attackPower); // 플레이어에게 데미지 주기
                     }
                 }
             }
@@ -228,30 +230,27 @@ public class Boss : MonoBehaviour
         }
     }
 
-    // 체력, 공격력, 경험치 등
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            currentState = State.Die;
-            Die();
-        }
-    }
-
     private void Die()
     {
         animator.SetTrigger("Die");
         navMeshAgent.isStopped = true;
 
-        // 아이템 드롭
-        if (itemDropPrefab != null)
+        if (DropItemData != null)
         {
-            Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
+            // 아이템 획득
+            GameManager.Instance.Inventory.AddItem(DropItemData, DropItemAmount);
         }
-
         // 적 오브젝트 제거
         Destroy(gameObject, 2f); // 2초 후에 오브젝트 제거
+    }
+
+    public void Damage(float damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            currentState = State.Die;
+            Die();
+        }
     }
 }

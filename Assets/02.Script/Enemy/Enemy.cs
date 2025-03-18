@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour,IDamageable
 {
     private NavMeshAgent navMeshAgent;    // NavMeshAgent
     private Animator animator;            // Animator
     private Transform targetPlayer;       // 플레이어의 위치
 
     public float detectionRange = 10f;    // 플레이어를 감지할 거리
-    private float attackDistance = 2f;  // 공격 거리 (플레이어와의 거리)
+    private float attackDistance = 2f;    // 공격 거리 (플레이어와의 거리)
     private float stopDistance = 2f;      // 공격 전 멈추는 거리 (attackDistance보다 약간 크게 설정)
     private float walkSpeed = 2f;         // 걷는 속도
     private float runSpeed = 5f;          // 달리는 속도
@@ -43,7 +43,10 @@ public class Enemy : MonoBehaviour
     public float experiencePoints = 50f;   // 적이 주는 경험치
     public float attackSpeed = 1f;         // 공격 속도 (초 단위)
 
-    public GameObject itemDropPrefab;      // 죽을 때 떨어뜨릴 아이템 프리팹
+    public ItemData DropItemData;      // 죽을 때 획득하는 아이템 데이터
+    public int DropItemAmount;      // 죽을 때 획득하는 아이템 개수
+
+    public DamageType DamageType => DamageType.Enemy;
 
     void Start()
     {
@@ -94,11 +97,6 @@ public class Enemy : MonoBehaviour
     {
         if (targetPlayer == null || navMeshAgent == null)
             return;
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            TakeDamage(health); // 체력을 즉시 0으로 만들기
-        }
 
         // 플레이어와의 거리 계산
         float distanceToPlayer = Vector3.Distance(transform.position, targetPlayer.position);
@@ -244,7 +242,6 @@ public class Enemy : MonoBehaviour
         {
             animator.SetTrigger("Attack");
 
-            // 플레이어에게 데미지 주기
             // 플레이어의 체력을 직접 수정하는 코드
             if (targetPlayer != null)
             {
@@ -253,11 +250,10 @@ public class Enemy : MonoBehaviour
                 if (distanceToPlayer <= attackDistance)
                 {
                     // 플레이어의 체력을 직접 수정
-                    Player player = targetPlayer.GetComponent<Player>();
+                    PlayerCondition player = targetPlayer.GetComponent<PlayerCondition>();
                     if (player != null)
                     {
-                        //  player.health -= attackPower; // 공격력만큼 체력 감소
-                        GainExperienceToPlayer(player); // 경험치 추가
+                        player.TakeDamage((int)attackPower); // 플레이어에게 데미지 주기
                     }
                 }
             }
@@ -277,26 +273,21 @@ public class Enemy : MonoBehaviour
         //animator.SetTrigger("Die");
         navMeshAgent.isStopped = true;
 
-        // 아이템 드롭
-        if (itemDropPrefab != null)
+        // 아이템 획득
+        if (DropItemData != null)
         {
-            Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
+            GameManager.Instance.Inventory.AddItem(DropItemData,DropItemAmount);
+        }
+
+        // 경험치 지급
+        PlayerCondition player = targetPlayer.GetComponent<PlayerCondition>();
+        if (player != null)
+        {
+            player.GetExp(experiencePoints);
         }
 
         // 적 오브젝트 제거
-        Destroy(gameObject, 2f); // 2초 후에 오브젝트 제거
-    }
-
-    // 데미지를 받는 함수
-    public void TakeDamage(float damage)
-    {
-        health -= damage;
-
-        if (health <= 0)
-        {
-            currentState = State.Die;
-            Die();
-        }
+        Destroy(gameObject, 1f); // 2초 후에 오브젝트 제거
     }
 
     private void SetRandomPatrolPosition()
@@ -308,12 +299,14 @@ public class Enemy : MonoBehaviour
         randomPatrolPosition = hit.position;
     }
 
-    // 플레이어에게 경험치를 직접 추가하는 함수
-    private void GainExperienceToPlayer(Player player)
+    // 데미지를 받는 함수
+    public void Damage(float damage)
     {
-        if (player != null)
+        health -= damage;
+        if (health <= 0)
         {
-            //  player.experience += experiencePoints; // 경험치 추가
+            currentState = State.Die;
+            Die();
         }
     }
 }
