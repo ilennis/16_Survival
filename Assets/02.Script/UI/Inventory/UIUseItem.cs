@@ -36,7 +36,7 @@ public class UIUseItem : MonoBehaviour
 
     private void OnClick(ItemData data, PointerEventData eventData)
     {
-        if (data.ItemType != ItemType.Food) return;
+        if (data ==null ||data.ItemType != ItemType.Food) return;
         useItem = data;
         useItemWindow.gameObject.SetActive(true);
         itemInfoText.text = $"<color=yellow>{data.ItemName}</color>을(를)\n사용하시겠습니까?";

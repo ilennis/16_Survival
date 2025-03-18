@@ -4,12 +4,12 @@ using UnityEngine.InputSystem;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] Animator animator;
-
     private Dictionary<int, WeaponData> setWeaponDataList = new();
     private Dictionary<WeaponData, Weapon> createdWeapons = new();
 
-    public Weapon CurrentWeapon;
+
+    [HideInInspector] public Weapon CurrentWeapon;
+    [SerializeField] private Transform weaponContainer;
 
     private int currentWeaponIndex = 1;
     private int slotCount = 3; //무기 슬롯수
@@ -32,6 +32,14 @@ public class WeaponController : MonoBehaviour
         {
             ChangeWeapon(1);
         }
+    }
+
+    private void LateUpdate()
+    {
+        // Weapon Camera를 Main Camera와 동기화
+        weaponContainer.transform.position = Camera.main.transform.position;
+        // MainCamera의 y축값만 가져오기,x축은 고정
+        weaponContainer.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0); // X축 회전 제한
     }
 
     //무기 변경
@@ -67,7 +75,7 @@ public class WeaponController : MonoBehaviour
     {
         if (!createdWeapons.ContainsKey(data))
         {
-            var weaponPrefab = Instantiate(data.ItemPrefab, Camera.main.transform);
+            var weaponPrefab = Instantiate(data.ItemPrefab, weaponContainer.transform);
             Weapon weapon = weaponPrefab.GetComponent<Weapon>();
             createdWeapons.Add(data, weapon);
         }
