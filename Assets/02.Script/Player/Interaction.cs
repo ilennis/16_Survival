@@ -6,11 +6,13 @@ public class Interaction : MonoBehaviour
 {
     public LayerMask InteractionLayer; // 감지할 레이어
     public float MaxCheckDistance = 3.0f; // 레이의 최대 감지 거리
-    public IInteractable Checkedtem; // 감지한 아이템
+    public IInteractable CheckedItem; // 감지한 아이템
+    public IInteractable CheckedWater; // 감지한 물
 
     private GameObject checkObject; // 감지한 물체
 
     public Action<IInteractable> OnCheckItemEvent = delegate { }; // 아이템 감지 이벤트
+    public Action<IInteractable> OnCheckWaterEvent = delegate { }; // 물 감지 이벤트
 
     private void Start()
     {
@@ -36,14 +38,15 @@ public class Interaction : MonoBehaviour
         //레이 표시
         Debug.DrawLine(ray.origin, ray.origin + ray.direction * MaxCheckDistance, Color.red);
         //레이 충돌
-        if (Physics.SphereCast(ray, sphereRadius, out RaycastHit hit, MaxCheckDistance, InteractionLayer))
+        RaycastHit hit;
+        if (Physics.SphereCast(ray, sphereRadius, out hit, MaxCheckDistance, InteractionLayer))
         {
             if (hit.collider.gameObject != checkObject)
             {
                 if (hit.collider.TryGetComponent(out IInteractable item))
                 {
                     checkObject = hit.collider.gameObject;
-                    Checkedtem = item;
+                    CheckedItem = item;
                 }
                 else
                 {
@@ -55,13 +58,13 @@ public class Interaction : MonoBehaviour
         {
             NotCheckedItem();
         }
-        OnCheckItemEvent?.Invoke(Checkedtem);
+        OnCheckItemEvent?.Invoke(CheckedItem);
     }
 
     //감지가 안되면
     private void NotCheckedItem()
     {
         checkObject = null;
-        Checkedtem = null;
+        CheckedItem = null;
     }
 }
