@@ -1883,6 +1883,7 @@ MonoBehaviour:
   controller: {fileID: 3212606560257921294}
   Condition: {fileID: 0}
   WeaponController: {fileID: 0}
+  Interaction: {fileID: 0}
 --- !u!114 &3212606560257921294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2005,6 +2006,9 @@ MonoBehaviour:
   InteractionLayer:
     serializedVersion: 2
     m_Bits: 512
+  WaterLayer:
+    serializedVersion: 2
+    m_Bits: 16
   MaxCheckDistance: 1
 --- !u!1 &4262590960147655476
 GameObject:

@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c700ec0ff84fa8b4e96eb4f614e19df1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waterData: {fileID: 0}
+  waterData: {fileID: 11400000, guid: 1046df6964aeaf642acf9f9a4b07ff11, type: 2}
 --- !u!64 &4530895152805290054
 MeshCollider:
   m_ObjectHideFlags: 0
