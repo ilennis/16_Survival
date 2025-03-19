@@ -43,17 +43,12 @@ public class PlayerCondition : MonoBehaviour, IDamage
             Health.Subtract(noHungerHealthDecay * Time.deltaTime);
         }
 
-        if (Health.curValue <= 0f)
-        {
-            Die();
-        }
-
         if (Thirst.curValue <= 0f)
         {
             Health.Subtract(noThirstHealthDecay * Time.deltaTime);
         }
 
-        if (Thirst.curValue <= 0f)
+        if (Health.curValue <= 0f)
         {
             Die();
         }
