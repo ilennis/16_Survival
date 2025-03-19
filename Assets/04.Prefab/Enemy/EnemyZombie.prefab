@@ -122,8 +122,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   detectionRange: 10
   currentState: 0
-  health: 100
-  attackPower: 10
+  health: 16
+  attackPower: 8
   experiencePoints: 50
   attackSpeed: 1
   DropItemData: {fileID: 11400000, guid: a8596940954d61e46a7445918b65e7ce, type: 2}

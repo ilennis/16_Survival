@@ -141,10 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f6448492b01c345bebc9f052aa6f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 10
+  detectionRange: 20
   currentState: 0
-  health: 100
-  attackPower: 10
+  health: 50
+  attackPower: 12
   experiencePoints: 50
   attackSpeed: 1
   DropItemData: {fileID: 11400000, guid: a8596940954d61e46a7445918b65e7ce, type: 2}

@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: BaseballBat
   m_EditorClassIdentifier: 
   ItemName: "\uC57C\uAD6C\uBC29\uB9DD\uC774"
-  Description: 
+  Description: "\uC9C0\uACE0\uC758 \uC57C\uAD6C\uBE60\uB530 \uACF5\uACA9\uB825 +15"
   Icon: {fileID: 21300000, guid: 51f175d61fdaebb46813033b8c9fbf7d, type: 3}
   ItemType: 0
   CellMaxHaveCount: 1
   ItemPrefab: {fileID: 1266747339009845344, guid: 7dc99798539fe3043b5ba2aed741af39, type: 3}
-  AttackDamage: 20
+  AttackDamage: 15
   ResourceDamage: 5
   AttackSpeed: 0
