@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 using System.Collections;
+using System.ComponentModel;
 
 public class Enemy : MonoBehaviour,IDamageable
 {
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour,IDamageable
     public ItemData DropItemData;      // 죽을 때 획득하는 아이템 데이터
     public int DropItemAmount;      // 죽을 때 획득하는 아이템 개수
 
+    private bool isDie = false;
     public DamageType DamageType => DamageType.Enemy;
 
     void Start()
@@ -302,9 +304,12 @@ public class Enemy : MonoBehaviour,IDamageable
     // 데미지를 받는 함수
     public void Damage(float damage)
     {
+        if (isDie) return;
         health -= damage;
+        NotificationManager.Instance.ShowNotification($"적에게 <color=red>{damage}</color>데미지!");
         if (health <= 0)
         {
+            isDie = true;
             currentState = State.Die;
             Die();
         }
