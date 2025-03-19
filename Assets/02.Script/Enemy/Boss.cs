@@ -44,6 +44,8 @@ public class Boss : MonoBehaviour,IDamageable
     public ItemData DropItemData;      // 죽을 때 획득할 아이템 데이터
     public int DropItemAmount;      // 획득할 아이템 개수
 
+    private bool isDie = false;
+
     public DamageType DamageType => DamageType.Enemy;
 
     void Start()
@@ -246,9 +248,12 @@ public class Boss : MonoBehaviour,IDamageable
 
     public void Damage(float damage)
     {
+        if (isDie) return;
         health -= damage;
+        NotificationManager.Instance.ShowNotification($"적에게 <color=red>{damage}</color>데미지!");
         if (health <= 0)
         {
+            isDie = true;
             currentState = State.Die;
             Die();
         }
