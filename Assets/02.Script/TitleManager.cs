@@ -7,15 +7,13 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour
 {
-    public SceneAsset scene;
-
     private void Update()
     {
         if (Input.anyKeyDown)
         {
             if (PlayerPrefs.GetInt("isStoryViewed") == 1)
             {
-                SceneManager.LoadScene(scene.name);
+                SceneManager.LoadScene("MainScene");
             }
             else
             {
