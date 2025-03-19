@@ -6,6 +6,7 @@ using TMPro;
 
 public class BuildingUI : MonoBehaviour
 {
+    /*
     public static BuildingUI Instance;
 
     [Header("UI Elements")]
@@ -59,4 +60,5 @@ public class BuildingUI : MonoBehaviour
             ToggleBuildingMenu();
         }
     }
+    */
 }
