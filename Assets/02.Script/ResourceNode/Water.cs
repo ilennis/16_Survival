@@ -44,7 +44,7 @@ public class Water : MonoBehaviour,IInteractable
         {
             Debug.Log("플레이어 나감");
             interaction.CheckedWater = null;
-            interaction.OnCheckWaterEvent(this);
+            interaction.OnCheckWaterEvent(null);
         }
     }
 }

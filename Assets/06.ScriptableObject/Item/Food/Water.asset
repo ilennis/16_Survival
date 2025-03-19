@@ -15,7 +15,7 @@ MonoBehaviour:
   ItemName: "\uBB3C"
   Description: "\uAC08\uC99D +10"
   Icon: {fileID: 21300000, guid: 60058b6317cf88c4ba62453e46f77cb3, type: 3}
-  ItemType: 1
+  ItemType: 2
   CellMaxHaveCount: 5
   ItemPrefab: {fileID: 0}
   FoodEffects:

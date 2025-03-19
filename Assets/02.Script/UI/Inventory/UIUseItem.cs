@@ -73,6 +73,7 @@ public class UIUseItem : MonoBehaviour
         bool isCanUseVaccine = data.ItemType == ItemType.Vaccine && inventory.IsHasItem(ItemType.Syringe);
         bool isPill = data.ItemType == ItemType.Pill;
         bool isFood = data.ItemType == ItemType.Food;
-        return isCanUseVaccine || isPill || isFood ;
+        bool isWater = data.ItemType == ItemType.Water;
+        return isCanUseVaccine || isPill || isFood || isWater;
     }
 }

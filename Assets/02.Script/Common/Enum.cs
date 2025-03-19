@@ -2,6 +2,7 @@ public enum ItemType
 {
     Equip,       //무기
     Food,        //음식
+    Water,        //물
     Wood,      //나무
     Iron,         // 철
     Rock,        //돌

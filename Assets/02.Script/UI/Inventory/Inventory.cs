@@ -102,6 +102,7 @@ public class Inventory : MonoBehaviour
 
         switch (itemData.ItemType)
         {
+            case ItemType.Water:
             case ItemType.Food:
                 // 아이템 사용 로직
                 if (itemData is FoodData food)
