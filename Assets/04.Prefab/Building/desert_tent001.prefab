@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7616110567921603193}
   - component: {fileID: 3460149438201274593}
   - component: {fileID: 3672155637268648229}
+  - component: {fileID: 1678893355730017155}
   m_Layer: 0
   m_Name: desert_tent001
   m_TagString: Untagged
@@ -27,13 +28,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4276969757383041162}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.039440632, y: 0, z: 0.19147873}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &7616110567921603193
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -103,3 +104,24 @@ MonoBehaviour:
   isUpgradable: 1
   healRadius: 5
   healAmount: 10
+--- !u!65 &1678893355730017155
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4276969757383041162}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 8.123127, y: 11.015062, z: 6.5680494}
+  m_Center: {x: -0.0000009536743, y: 0.0000004768373, z: 3.1177044}
