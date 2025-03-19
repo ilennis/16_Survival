@@ -11,14 +11,14 @@ public class TitleManager : MonoBehaviour
     {
         if (Input.anyKeyDown)
         {
-            if (PlayerPrefs.GetInt("isStoryViewed") == 1)
-            {
-                SceneManager.LoadScene("MainScene");
-            }
-            else
-            {
+            //if (PlayerPrefs.GetInt("isStoryViewed") == 1)
+            //{
+            //    SceneManager.LoadScene("MainScene");
+            //}
+            //else
+            //{
                 SceneManager.LoadScene("StoryScene");
-            }
+            //}
         }
     }
 }

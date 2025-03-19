@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 506719324}
-  m_IndirectSpecularColor: {r: 0.17074177, g: 0.18498129, b: 0.19689256, a: 1}
+  m_IndirectSpecularColor: {r: 0.17075318, g: 0.18479386, b: 0.19687468, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 153303710}
   - component: {fileID: 153303712}
   - component: {fileID: 153303711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4542,7 +4542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 488378673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7738,6 +7738,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7672485121057046799, guid: cec548896f251da4c96c7450900c7239, type: 3}
+      propertyPath: m_Speed
+      value: 3.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7774,7 +7778,7 @@ AudioSource:
   MinDistance: 5
   MaxDistance: 50
   Pan2D: 0
-  rolloffMode: 0
+  rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -7782,23 +7786,50 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.1
       value: 1
-      inSlope: 0
-      outSlope: 0
+      inSlope: -10.0039835
+      outSlope: -10.0039835
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.12932053
+      value: 0.07673645
+      inSlope: -0.62524897
+      outSlope: -0.62524897
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.43239897
+      value: 0
+      inSlope: -0.08636379
+      outSlope: -0.08636379
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.9708637
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.83553773
+      value: 0.000091552734
+      inSlope: -0.15631224
+      outSlope: -0.15631224
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      value: 0.1
+      inSlope: -0.10003988
+      outSlope: -0.10003988
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
@@ -12706,15 +12737,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1546806707832809340, guid: 8097f282dbf3d86418f71cc3de8be01a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 907.3
+      value: -570
       objectReference: {fileID: 0}
     - target: {fileID: 1546806707832809340, guid: 8097f282dbf3d86418f71cc3de8be01a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -290.66
+      value: -299.8
       objectReference: {fileID: 0}
     - target: {fileID: 1546806707832809340, guid: 8097f282dbf3d86418f71cc3de8be01a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -895.6
+      value: -624
       objectReference: {fileID: 0}
     - target: {fileID: 1546806707832809340, guid: 8097f282dbf3d86418f71cc3de8be01a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -14681,7 +14712,7 @@ GameObject:
   - component: {fileID: 1834540093}
   - component: {fileID: 1834540095}
   - component: {fileID: 1834540094}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14835,7 +14866,7 @@ GameObject:
   - component: {fileID: 1849656974}
   - component: {fileID: 1849656976}
   - component: {fileID: 1849656975}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15313,7 +15344,7 @@ GameObject:
   - component: {fileID: 1909940255}
   - component: {fileID: 1909940257}
   - component: {fileID: 1909940256}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Terrain_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
