@@ -64,11 +64,16 @@ public class BuildManager : MonoBehaviour
         Vector3 screenCenter = new Vector3(Screen.width / 2, Screen.height / 2, 0);
         Ray ray = Camera.main.ScreenPointToRay(screenCenter);
         RaycastHit hit;
+       
+
         if (Physics.Raycast(ray, out hit, 20, groundLayerMask))
         {
+            if (currentPreview == null)
+            {
+                currentPreview = Instantiate(buildingPrefabs[selectedBuildingIndex], hit.transform);
+            }
             currentPreview.transform.position = hit.point;
-
-            currentPreview = Instantiate(buildingPrefabs[selectedBuildingIndex], hit.transform);
+            
         }
        
        
